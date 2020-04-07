@@ -23,3 +23,10 @@ hs_err_pid*
 .idea/
 *.iml
 out/
+
+
+.sts4-cache
+.settings
+.project
+.classpath
+target/
