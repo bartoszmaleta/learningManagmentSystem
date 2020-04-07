@@ -8,6 +8,6 @@ public interface Parser {
     void convertFileToString();
     void convertStringToList();
     void addNewRecord(String[] newRecord);
-    void updateFile(List<List<String>> newList);
+    void updateFile(List<List<String>> newList, String header);
 
 }

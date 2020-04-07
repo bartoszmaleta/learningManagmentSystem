@@ -18,11 +18,9 @@ public class CsvParser implements Parser {
     public CsvParser(String filenameToParse) {
         listOfLines = new ArrayList<>();
         this.fileName = filenameToParse;
-        fillList();
     }
 
-    @Override
-    public List<List<String>> getListOfLines() {
+    public List<List<String>> getList() {
         return listOfLines;
     }
 
@@ -32,6 +30,7 @@ public class CsvParser implements Parser {
         try {
             File file = new File(this.fileName);
             Scanner scanner = new Scanner(file);
+            scanner.nextLine();
             while (scanner.hasNext()) {
                 fileString += scanner.nextLine();
                 fileString += "\n";
@@ -45,7 +44,17 @@ public class CsvParser implements Parser {
 
     @Override
     public void convertStringToList() {
-        this.lineAsList = Arrays.asList(this.fileString.split(","));
+        this.listOfLines = new ArrayList<>();
+        this.lineAsList = Arrays.asList(this.fileString.split("\\r?\\n"));
+        for (String line : lineAsList) {
+            this.listOfLines.add(Arrays.asList(line.split(",")));
+        }
+    }
+
+    @Override
+    public List<List<String>> getListOfLines() {
+        fillList();
+        return listOfLines;
     }
 
     @Override
@@ -56,10 +65,27 @@ public class CsvParser implements Parser {
 
     @Override
     public void addNewRecord(String[] newRecord) {
+        String newLineToFile = "\n" + String.join(",", newRecord) + ",";
+        try {
+            FileWriter fw = new FileWriter(this.fileName, true);
+            fw.append("\n" + String.join(",", newRecord) + ",");
+//            fw.write(newLineToFile + "\n");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addNewRecord2(String[] newRecord) {
+        System.out.println("here");
         String newLineToFile = String.join(",", newRecord) + ",";
         try {
-            FileWriter fw = new FileWriter(this.fileName);
-            fw.write(newLineToFile + "\n");
+            FileWriter fw = new FileWriter(this.fileName, true);
+            for (String elem : newRecord) {
+                fw.append(elem + ",");
+            }
+            fw.append("\n");
+            fw.flush();
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,9 +93,10 @@ public class CsvParser implements Parser {
     }
 
     @Override
-    public void updateFile(List<List<String>> newList) {
-        String newFileInString = "";
-        for (List<String> oneLineAsList : this.listOfLines) {
+    public void updateFile(List<List<String>> newList, String header) {
+//        String newFileInString = "id, username, password, name, surname, role,\n";
+        String newFileInString = header;
+        for (List<String> oneLineAsList : newList) {
             for (int i = 0; i < oneLineAsList.size(); i++) {
                 newFileInString += oneLineAsList.get(i);
                 newFileInString += ",";
@@ -78,7 +105,7 @@ public class CsvParser implements Parser {
         }
 
         try {
-            FileWriter fw = new FileWriter(this.fileName);
+            FileWriter fw = new FileWriter(this.fileName, false);
             fw.write(newFileInString + "\n");
             fw.close();
         } catch (IOException e) {
@@ -86,3 +113,8 @@ public class CsvParser implements Parser {
         }
     }
 }
+
+//id, username, password, name, surname, role,
+//        1,bartosz,maleta,admin,
+//        2,john,smith,employee
+//        3,Aqwe,qwe,/
