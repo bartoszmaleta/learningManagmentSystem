@@ -1,0 +1,120 @@
+package com.company.dao.Parser;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class CsvParser implements Parser {
+    private List<List<String>> listOfLines;
+    private String fileName;
+    private String fileString;
+    private List<String> lineAsList;
+
+    public CsvParser(String filenameToParse) {
+        listOfLines = new ArrayList<>();
+        this.fileName = filenameToParse;
+    }
+
+    public List<List<String>> getList() {
+        return listOfLines;
+    }
+
+    @Override
+    public void convertFileToString() {
+        this.fileString = "";
+        try {
+            File file = new File(this.fileName);
+            Scanner scanner = new Scanner(file);
+            scanner.nextLine();
+            while (scanner.hasNext()) {
+                fileString += scanner.nextLine();
+                fileString += "\n";
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            // TODO how to handle exception
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void convertStringToList() {
+        this.listOfLines = new ArrayList<>();
+        this.lineAsList = Arrays.asList(this.fileString.split("\\r?\\n"));
+        for (String line : lineAsList) {
+            this.listOfLines.add(Arrays.asList(line.split(",")));
+        }
+    }
+
+    @Override
+    public List<List<String>> getListOfLines() {
+        fillList();
+        return listOfLines;
+    }
+
+    @Override
+    public void fillList() {
+        convertFileToString();
+        convertStringToList();
+    }
+
+    @Override
+    public void addNewRecord(String[] newRecord) {
+        String newLineToFile = "\n" + String.join(",", newRecord) + ",";
+        try {
+            FileWriter fw = new FileWriter(this.fileName, true);
+            fw.append("\n" + String.join(",", newRecord) + ",");
+//            fw.write(newLineToFile + "\n");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addNewRecord2(String[] newRecord) {
+        System.out.println("here");
+        String newLineToFile = String.join(",", newRecord) + ",";
+        try {
+            FileWriter fw = new FileWriter(this.fileName, true);
+            for (String elem : newRecord) {
+                fw.append(elem + ",");
+            }
+            fw.append("\n");
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateFile(List<List<String>> newList, String header) {
+//        String newFileInString = "id, username, password, name, surname, role,\n";
+        String newFileInString = header;
+        for (List<String> oneLineAsList : newList) {
+            for (int i = 0; i < oneLineAsList.size(); i++) {
+                newFileInString += oneLineAsList.get(i);
+                newFileInString += ",";
+            }
+            newFileInString += "\n";
+        }
+
+        try {
+            FileWriter fw = new FileWriter(this.fileName, false);
+            fw.write(newFileInString + "\n");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+//id, username, password, name, surname, role,
+//        1,bartosz,maleta,admin,
+//        2,john,smith,employee
+//        3,Aqwe,qwe,/

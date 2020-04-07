@@ -9,13 +9,12 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>learningManagmentSystem</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/bartoszmaleta/learningManagmentSystem</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.11</maven.compiler.source>
+    <maven.compiler.target>1.11</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -24,6 +23,19 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.jakewharton.fliptables</groupId>
+      <artifactId>fliptables</artifactId>
+      <version>1.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.tomas-langer</groupId>
+      <artifactId>chalk</artifactId>
+      <version>1.0.2</version>
     </dependency>
   </dependencies>
 
