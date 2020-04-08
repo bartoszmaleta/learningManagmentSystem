@@ -80,7 +80,7 @@ public class CsvParser implements Parser {
     @Override
     public void updateFile(List<List<String>> newList, String header) {
 //        String newFileInString = "id, username, password, name, surname, role,\n";
-        String newFileInString = header;
+        String newFileInString = header + "\n";
         for (List<String> oneLineAsList : newList) {
             for (int i = 0; i < oneLineAsList.size(); i++) {
                 newFileInString += oneLineAsList.get(i);

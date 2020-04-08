@@ -35,6 +35,13 @@ public class App {
         User manager = new ManagerDAO().readManager();
         String managerName = manager.getName();
         System.out.println(managerName);
+
+        System.out.println("------------");
+        CsvParser csvParser2 = new CsvParser("src/main/resources/grades.csv");
+        csvParser.updateFile(csvParser2.getUpdatedList(), "trala");
+        System.out.println("updated list with new list = " + csvParser.getUpdatedList());
+
+
         //        users.csv
 //                id,username,password,name,surname,role,
 //                1,bartoszmal,password1,bartosz,maleta,student
