@@ -11,17 +11,14 @@ import java.util.List;
 
 public class App2 {
     public static void main(String[] args) throws FileNotFoundException {
-//        LoginController logging = new LoginController();
-//        logging.init();
+        LoginController logging = new LoginController();
+        logging.init();
 
-        CsvParser csvParser = new CsvParser("src/main/resources/users.csv");
-        UserDAOFromCSV userDAOFromCSV = new UserDAOFromCSV();
-        List<User> students = userDAOFromCSV.extractUserFromListByRoleGiven("student");
-//        view.viewAllStudents(studentDAO.extractUserFromList(csvParser.getListOfLines()));
-
-        System.out.println(students);
-//        System.out.println(students.get(0).getName());
-        View.viewAllStudents(students);
+//        UserDAOFromCSV userDAOFromCSV = new UserDAOFromCSV();
+//        List<User> students = userDAOFromCSV.extractUserFromListByRoleGiven("student");
+//
+//        System.out.println(students);
+//        View.viewAllStudents(students);
 
     }
 }

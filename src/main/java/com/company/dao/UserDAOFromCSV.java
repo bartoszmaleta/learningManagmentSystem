@@ -86,11 +86,19 @@ public class UserDAOFromCSV implements UserDAO {
 
     @Override
     public void remove(User user) {
-
+        List<List<String>> newList;
+        for (int i = 0; i < this.listOfRecords.size(); i++) {
+            if (this.listOfRecords.get(i).get(0).equals(String.valueOf(user.getId()))) {
+                this.listOfRecords.remove(this.listOfRecords.get(i));
+            }
+        }
+        newList = this.listOfRecords;
+        String header = "id, username, password, name, surname, role,";
+        this.csvParser.updateFile(newList, header);
     }
 
     @Override
-    public void update(User user) {
+    public void edit(User user) {
 
     }
 
