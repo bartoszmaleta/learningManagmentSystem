@@ -23,8 +23,8 @@ public class App {
         System.out.println("size = " + csvParser.getUpdatedList().size());
 
 
-//        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
-//        csvParser.addNewRecord(recordToAdd);
+        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
+        csvParser.addNewRecord(recordToAdd);
 //
         System.out.println("list from file with added record = " + csvParser.getUpdatedList());
         System.out.println("new size = " + csvParser.getUpdatedList().size());

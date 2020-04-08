@@ -55,6 +55,14 @@ public class TerminalManager {
         return out;
     }
 
+//    TODO
+    public static String askForPassword(String question) {
+        System.out.println(question);
+        Scanner scanner = new Scanner(System.in);
+        String out = scanner.nextLine();
+        return out;
+    }
+
     public static int askForInt(String question) {
         System.out.println(question);
         Scanner scanner = new Scanner(System.in);

@@ -28,18 +28,17 @@ public class ManagerDAO implements UserDAO {
 
     @Override
     public void write(User user) {
-        String[] toStringArrayManager = toStringArray(this.manager);
+        String[] toStringArrayManager = toStringArray(user);
         csvParser.addNewRecord(toStringArrayManager);
     }
 
-    @Override
-    public void remove(User user) {
-
-    }
-
-    @Override
-    public void update(User user) {
-
+    private String[] toStringArray(User user) {
+        String[] managaerArray = {String.valueOf(user.getId())
+                , user.getUsername()
+                , user.getName()
+                , user.getSurname()
+                , user.getRole()};
+        return managaerArray;
     }
 
     public User readManager() {
@@ -58,16 +57,21 @@ public class ManagerDAO implements UserDAO {
     }
 
     @Override
+    public void remove(User user) {
+
+    }
+
+    @Override
+    public void update(User user) {
+
+    }
+
+    @Override
     public User read(User user) {
         return null;
     }
 
-    private String toString(Manager manager) {
-
-        return null;
-    }
-
-    private String[] toStringArray(Manager manager) {
+    private String toString(User user) {
 
         return null;
     }
