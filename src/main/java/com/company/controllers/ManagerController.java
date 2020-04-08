@@ -46,7 +46,7 @@ public class ManagerController implements Employee{
 
             switch (choice) {
                 case 1:
-                    Mentor mentorToAdd = getMentorFromProvidedData();
+                    User mentorToAdd = getMentorFromProvidedData();
                     addMentor(mentorToAdd);
                     break;
                 case 2:
@@ -56,7 +56,7 @@ public class ManagerController implements Employee{
                     break;
                 case 3:
                     ManagerMenu.displayFirstEditingMentorMenu();
-                    View.viewAllMentors(mentorList);
+                    displayMentors();
                     String usernameOfMentorToEdit = TerminalManager.askForString("\n" + "Enter username of mentor you want to edit: ");
                     User mentorToEdit = getMentorFromListByUsername(usernameOfMentorToEdit);
                     ManagerMenu.displaySecondEditingMentorMenu();
@@ -64,6 +64,7 @@ public class ManagerController implements Employee{
                     break;
                 case 4:
                     displayMentors();
+                    break;
                 case 0:
                     isRunning = false;
                     break;
@@ -75,12 +76,15 @@ public class ManagerController implements Employee{
 
 
     public void addMentor(User mentor) {
-        mentorList.add(mentor);
+        System.out.println("before size of mentorList = " + mentorList.size());
+        this.mentorList.add(mentor);
+        System.out.println("after size of mentorList = " + mentorList.size());
+        this.userDAOFromCSV.write(mentor);
     }
 
     public void removeMentor(User mentor) {
-        mentorList.remove(mentor);
-        userDAOFromCSV.remove(mentor);
+        this.mentorList.remove(mentor);
+        this.userDAOFromCSV.remove(mentor);
     }
 
     public void editMentor(User mentor) {
@@ -113,15 +117,17 @@ public class ManagerController implements Employee{
                 mentor.setSurname(surname);
                 break;
         }
+        this.userDAOFromCSV.edit(mentor);
     }
-    public Mentor getMentorFromProvidedData() {
-        int id = TerminalManager.askForInt("Enter mentor's id: ");
+    public User getMentorFromProvidedData() {
+//        int id = TerminalManager.askForInt("Enter mentor's id: ");
+        int id = this.userDAOFromCSV.getLastIndex() + 1;
         String username = TerminalManager.askForString("Enter mentor's username: ");
         String password = TerminalManager.askForString("Enter mentor's password: ");
         String name = TerminalManager.askForString("Enter mentor's name: ");
         String surname = TerminalManager.askForString("Enter mentor's surname: ");
 
-        return new Mentor(id, username, password, name, surname, "mentor");
+        return new User(id, username, password, name, surname, "mentor");
     }
 
     public User getMentorFromListByUsername(String username) {
@@ -136,13 +142,13 @@ public class ManagerController implements Employee{
     }
 
     public void displayMentors() {
-
-        View.viewAllMentors(mentorList);
+        View.viewAllMentors(new UserDAOFromCSV().extractUserFromListByRoleGiven("mentor"));
     }
 
     public void getMentorFromList(Mentor mentor) {
         mentorList.get(mentorList.indexOf(mentor));
     }
+
     @Override
     public void displayStudents() {
         View.viewAllStudents(studentsList);

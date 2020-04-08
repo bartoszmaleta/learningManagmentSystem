@@ -40,7 +40,7 @@ public class CsvParser implements Parser {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            // TODO how to handle exception
+            e.getMessage();
             e.printStackTrace();
         }
     }
@@ -68,11 +68,9 @@ public class CsvParser implements Parser {
 
     @Override
     public void addNewRecord(String[] newRecord) {
-//        String newLineToFile = "\n" + String.join(",", newRecord) + ",";
         try {
             FileWriter fw = new FileWriter(this.fileName, true);
             fw.append("\n" + String.join(",", newRecord) + ",");
-//            fw.write(newLineToFile + "\n");
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +79,6 @@ public class CsvParser implements Parser {
 
     @Override
     public void updateFile(List<List<String>> newList, String header) {
-//        String newFileInString = "id, username, password, name, surname, role,\n";
         String newFileInString = header + "\n";
         for (List<String> oneLineAsList : newList) {
             for (int i = 0; i < oneLineAsList.size(); i++) {

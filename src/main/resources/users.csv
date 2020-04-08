@@ -2,5 +2,7 @@ id, username, password, name, surname, role,
 1,bartoszmal,password1,bartosz,maleta,student,
 2,johny,password2,john,smith,manager,
 3,stevo,password3,steve,williams,regularEmployee,
+4,tommy,password4,tom,thompsy,mentor,
 5,tomwqwemy,p213assword4,t3om,th1ompson,student,
-
+6,userM,passM,namM,suM,mentor,
+7,tommy,qwe,asd,xxxx,mentor,
