@@ -1,5 +1,8 @@
 package com.company.models.users;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String username;
     private String password;
@@ -67,5 +70,4 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-
 }

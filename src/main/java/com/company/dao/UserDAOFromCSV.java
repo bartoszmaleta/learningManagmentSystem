@@ -5,6 +5,7 @@ import com.company.models.users.User;
 import com.company.models.users.employees.Manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDAOFromCSV implements UserDAO {
@@ -99,7 +100,19 @@ public class UserDAOFromCSV implements UserDAO {
 
     @Override
     public void edit(User user) {
-
+        List<List<String>> newList;
+        for (int i = 0; i < this.listOfRecords.size(); i++) {
+            if (this.listOfRecords.get(i).get(0).equals(String.valueOf(user.getId()))) {
+                this.listOfRecords.get(i).set(1, user.getUsername());
+//                this.listOfRecords.get(i).set(2, user.getPassword()); // can't!
+                this.listOfRecords.get(i).set(3, user.getName());
+                this.listOfRecords.get(i).set(4, user.getSurname());
+                this.listOfRecords.get(i).set(5, user.getRole());
+            }
+        }
+        newList = this.listOfRecords;
+        String header = "id, username, password, name, surname, role,";
+        this.csvParser.updateFile(newList, header);
     }
 
     @Override

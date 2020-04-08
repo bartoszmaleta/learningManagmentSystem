@@ -40,7 +40,7 @@ public class CsvParser implements Parser {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            // TODO how to handle exception
+            e.getMessage();
             e.printStackTrace();
         }
     }

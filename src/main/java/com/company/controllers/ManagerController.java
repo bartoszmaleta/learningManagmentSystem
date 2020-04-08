@@ -113,6 +113,7 @@ public class ManagerController implements Employee{
                 mentor.setSurname(surname);
                 break;
         }
+        userDAOFromCSV.edit(mentor);
     }
     public Mentor getMentorFromProvidedData() {
         int id = TerminalManager.askForInt("Enter mentor's id: ");
@@ -143,6 +144,7 @@ public class ManagerController implements Employee{
     public void getMentorFromList(Mentor mentor) {
         mentorList.get(mentorList.indexOf(mentor));
     }
+
     @Override
     public void displayStudents() {
         View.viewAllStudents(studentsList);
