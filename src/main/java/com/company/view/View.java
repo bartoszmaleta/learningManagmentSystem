@@ -13,15 +13,17 @@ import java.util.List;
 public class View {
 
     public void viewAllStudents(List<User> students) {
+//        String[] studentsHeader = { "id", "login", "password", "name", "surname", "role" };
         System.out.println(FlipTableConverters.fromIterable(students, User.class));
     }
 
-    public void viewAllMentors(ArrayList<Mentor> mentors) {
+    public void viewAllMentors(List<User> mentors) {
+        System.out.println(FlipTableConverters.fromIterable(mentors, User.class));
 
     }
 
-    public void viewAllRegularEmployees(ArrayList<RegularEmployee> regularEmployees) {
-
+    public void viewAllRegularEmployees(List<RegularEmployee> regularEmployees) {
+//        System.out.println(FlipTableConverters.fromIterable(regularEmployees, User.class));
     }
 
     public void viewGrades(Student student) {

@@ -4,7 +4,7 @@ import com.company.models.users.User;
 
 public class Student extends User {
 
-    public Student(String id, String username, String password, String name, String surname, String role) {
+    public Student(String username, String password, String name, String surname, String role) {
         super(username, password, name, surname, role);
     }
 }

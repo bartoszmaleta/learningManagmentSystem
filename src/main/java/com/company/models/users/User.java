@@ -6,7 +6,7 @@ public abstract class User {
     private String name;
     private String surname;
     private String role;
-    private int id;
+//    private int id;
 
     public User(String username, String password, String name, String surname, String role) {
         this.username = username;
@@ -36,7 +36,7 @@ public abstract class User {
         return role;
     }
 
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
 }

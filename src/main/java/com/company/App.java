@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.dao.MentorDAO;
 import com.company.dao.Parser.CsvParser;
 import com.company.dao.StudentDAO;
 import com.company.models.users.User;
@@ -35,12 +36,13 @@ public class App {
         //
         System.out.println("------------");
         StudentDAO studentDAO = new StudentDAO();
-
+        MentorDAO mentorDAO = new MentorDAO();
         View view = new View();
 
         System.out.println("*****************");
         view.viewAllStudents(studentDAO.extractUserFromList(csvParser.getListOfLines()));
         System.out.println("*****************");
+        view.viewAllStudents(mentorDAO.extractUserFromList(csvParser.getListOfLines()));
 
 
         //        users.csv
