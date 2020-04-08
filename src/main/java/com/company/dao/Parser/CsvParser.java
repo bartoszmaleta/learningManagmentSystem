@@ -20,7 +20,8 @@ public class CsvParser implements Parser {
         this.fileName = filenameToParse;
     }
 
-    public List<List<String>> getList() {
+    @Override
+    public List<List<String>> getListOfLines() {
         return listOfLines;
     }
 
@@ -52,7 +53,7 @@ public class CsvParser implements Parser {
     }
 
     @Override
-    public List<List<String>> getListOfLines() {
+    public List<List<String>> getUpdatedList() {
         fillList();
         return listOfLines;
     }
@@ -70,22 +71,6 @@ public class CsvParser implements Parser {
             FileWriter fw = new FileWriter(this.fileName, true);
             fw.append("\n" + String.join(",", newRecord) + ",");
 //            fw.write(newLineToFile + "\n");
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addNewRecord2(String[] newRecord) {
-        System.out.println("here");
-        String newLineToFile = String.join(",", newRecord) + ",";
-        try {
-            FileWriter fw = new FileWriter(this.fileName, true);
-            for (String elem : newRecord) {
-                fw.append(elem + ",");
-            }
-            fw.append("\n");
-            fw.flush();
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

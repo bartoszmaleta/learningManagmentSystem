@@ -12,16 +12,16 @@ public class App {
         System.out.println("Hello World!");
 
         CsvParser csvParser = new CsvParser("src/main/resources/users.csv");
-        System.out.println("List of lists from file = " + csvParser.getListOfLines());
-        System.out.println("size = " + csvParser.getListOfLines().size());
+        System.out.println("List of lists from file = " + csvParser.getUpdatedList());
+        System.out.println("size = " + csvParser.getUpdatedList().size());
 
 //        System.out.println(csvParser.getList());
 
         String[] recordToAdd = {"5we4", "Awqsdzx23weasdqwe", "asd3"};
         csvParser.addNewRecord(recordToAdd);
 //
-        System.out.println("list = " + csvParser.getList());
-        System.out.println("list from file = " + csvParser.getListOfLines());
+        System.out.println("list = " + csvParser.getListOfLines());
+        System.out.println("list from file = " + csvParser.getUpdatedList());
 
         //
         System.out.println("------------");

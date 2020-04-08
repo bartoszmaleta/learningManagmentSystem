@@ -3,6 +3,7 @@ package com.company.dao.Parser;
 import java.util.List;
 
 public interface Parser {
+    List<List<String>> getUpdatedList();
     List<List<String>> getListOfLines();
     void fillList();
     void convertFileToString();
