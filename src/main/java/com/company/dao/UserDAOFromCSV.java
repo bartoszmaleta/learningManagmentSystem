@@ -7,7 +7,7 @@ import com.company.models.users.employees.Manager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerDAO implements UserDAO {
+public class UserDAOFromCSV implements UserDAO {
 
     int idIndex = 0;
     int usernameIndex = 1;
@@ -17,11 +17,11 @@ public class ManagerDAO implements UserDAO {
     int roleIndex = 5;
 
     private CsvParser csvParser;
-
     private List<List<String>> listOfRecords;
-    private Manager manager;
+    private User user;
     private String filepathOfUsersCsv = "src/main/resources/users.csv";
-    public ManagerDAO() { // with parameter??
+
+    public UserDAOFromCSV() { // with parameter??
         this.csvParser = new CsvParser(filepathOfUsersCsv);
         listOfRecords = new ArrayList<>();
     }
@@ -32,32 +32,37 @@ public class ManagerDAO implements UserDAO {
 
     @Override
     public void write(User user) {
-        String[] toStringArrayManager = toStringArray(user);
-        csvParser.addNewRecord(toStringArrayManager);
+        String[] toStringArrayUser = toStringArray(user);
+        csvParser.addNewRecord(toStringArrayUser);
     }
 
     private String[] toStringArray(User user) {
-        String[] managaerArray = {String.valueOf(user.getId())
+        String[] userArray = {String.valueOf(user.getId())
                 , user.getUsername()
                 , user.getName()
                 , user.getSurname()
                 , user.getRole()};
-        return managaerArray;
+        return userArray;
     }
 
-    public User readManager() {
+    public User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven) {
         this.listOfRecords = csvParser.getUpdatedList();
+
         for (int i = 0; i < listOfRecords.size(); i++) {
-            if (listOfRecords.get(i).get(roleIndex).equals("manager")) {
-                this.manager = new Manager(Integer.parseInt(listOfRecords.get(i).get(idIndex))
+            if (listOfRecords.get(i).get(usernameIndex).equals(usernameGiven)
+                    && listOfRecords.get(i).get(passwordIndex).equals(passwordGiven)) {
+                System.out.println("Found!");
+
+                this.user = new User(Integer.parseInt(listOfRecords.get(i).get(idIndex))
                         , listOfRecords.get(i).get(usernameIndex)
                         , listOfRecords.get(i).get(passwordIndex)
                         , listOfRecords.get(i).get(nameIndex)
                         , listOfRecords.get(i).get(surnameIndex)
-                        , listOfRecords.get(i).get(roleIndex));
+                        , listOfRecords.get(i).get(roleIndex)) {
+                };
             }
         }
-        return this.manager;
+        return this.user;
     }
 
     @Override

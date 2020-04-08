@@ -26,7 +26,7 @@ public class View {
 //        System.out.println(FlipTableConverters.fromIterable(regularEmployees, User.class));
     }
 
-    public void viewGrades(Student student) {
+    public static void viewGrades(Student student) {
 
     }
 }

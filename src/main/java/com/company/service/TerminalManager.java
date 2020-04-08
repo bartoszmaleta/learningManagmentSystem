@@ -55,6 +55,24 @@ public class TerminalManager {
         return out;
     }
 
+//    TODO
+    public static String askForPassword(String question) {
+        System.out.println(question);
+        Scanner scanner = new Scanner(System.in);
+        String out = scanner.nextLine();
+        return out;
+    }
+
+    public static int takeIntInputWithoutMessage() {
+        Scanner scanner = new Scanner(System.in);
+        String output = scanner.next();
+        while (!output.matches("[0-9]+")) {
+            printString("Use only numbers");
+            output = scanner.next();
+        }
+        return Integer.parseInt(output);
+    }
+
     public static int askForInt(String question) {
         System.out.println(question);
         Scanner scanner = new Scanner(System.in);
@@ -112,4 +130,6 @@ public class TerminalManager {
 
         return false;
     }
+
+
 }

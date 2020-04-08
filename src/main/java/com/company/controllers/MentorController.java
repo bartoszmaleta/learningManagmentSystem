@@ -13,6 +13,12 @@ public class MentorController implements Employee {
     private HashMap<String, ArrayList<Student>> classes; //there will be class name as string
     private ArrayList<Assignment> assignmentsList;
 
+    public MentorController(User user) {
+        System.out.println("Mentor Controller here");
+
+        this.user = user;
+    }
+
     public void addAssignment(Assignment assignment) {
 
     }
@@ -35,6 +41,11 @@ public class MentorController implements Employee {
 
     @Override
     public void displayStudents() {
+
+    }
+
+    public void init() {
+        System.out.println("Mentor Controller here");
 
     }
 }

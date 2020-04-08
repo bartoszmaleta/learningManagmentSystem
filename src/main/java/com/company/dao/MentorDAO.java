@@ -7,7 +7,7 @@ import com.company.models.users.students.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MentorDAO implements CsvDAO {
+public class MentorDAO implements UserDAO {
     @Override
     public void write(User user) {
 
@@ -24,8 +24,8 @@ public class MentorDAO implements CsvDAO {
     }
 
     @Override
-    public void read(User user) {
-
+    public User read(User user) {
+        return null;
     }
 
     public List<User> extractUserFromList(List<List<String>> listOfMentors) {
