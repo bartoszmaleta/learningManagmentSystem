@@ -19,4 +19,29 @@ public class ManagerMenu {
         System.out.println();
         System.out.println("What is Your choice : ");
     }
+
+    public static void displayFirstEditingMentorMenu() {
+        System.out.println();
+        System.out.println("     ****************************************");
+        System.out.println("     *              Manager  MENU           *");
+        System.out.println("     ****************************************");
+        System.out.println("        Which mentor do you want to edit?");
+    }
+
+    public static void displaySecondEditingMentorMenu() {
+        System.out.println();
+        System.out.println("     ****************************************");
+        System.out.println("     *              Manager  MENU           *");
+        System.out.println("     ****************************************");
+        System.out.println("     Which mentor data do you want to edit?");
+        System.out.println("     (1) Username");
+        System.out.println("     (2) Password");
+        System.out.println("     (3) Name");
+        System.out.println("     (4) Surname");
+        System.out.println("     (5) Edit all data");
+        System.out.println("     (0) Back to the main menu");
+        System.out.println();
+        System.out.println("What is Your choice : ");
+
+    }
 }
