@@ -36,6 +36,7 @@ public class StudentDAO implements UserDAO {
     public CsvParser getCsvParser() {
         return csvParser;
     }
+
     @Override
     public void write(User user) {
         String[] toStringArrayStudent = toStringArray(user);
@@ -72,8 +73,8 @@ public class StudentDAO implements UserDAO {
         System.out.println(this.listOfRecords);
         for (int i = 0; i < listOfRecords.size(); i++) {
             if (listOfRecords.get(i).get(roleIndex).equals("student")
-            && listOfRecords.get(i).get(usernameIndex).equals(usernameGiven)
-            && listOfRecords.get(i).get(passwordIndex).equals(passwordGiven)) {
+                    && listOfRecords.get(i).get(usernameIndex).equals(usernameGiven)
+                    && listOfRecords.get(i).get(passwordIndex).equals(passwordGiven)) {
                 this.student = new Student(Integer.parseInt(listOfRecords.get(i).get(idIndex))
                         , listOfRecords.get(i).get(usernameIndex)
                         , listOfRecords.get(i).get(passwordIndex)
@@ -85,9 +86,9 @@ public class StudentDAO implements UserDAO {
         return this.student;
     }
 
-    public List<User> extractUserFromList(List<List<String>> listOfStudents) {
+    public List<User> extractUserFromList(List<List<String>> listOfStudents, String roleForList) {
         String id, login, password, name, surname, role;
-        List<User> studentsArray = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         for (int i = 0; i < listOfStudents.size(); i++) {
             List<String> students = listOfStudents.get(i);
             id = students.get(0);
@@ -96,10 +97,17 @@ public class StudentDAO implements UserDAO {
             name = students.get(3);
             surname = students.get(4);
             role = students.get(5);
-            if (role.equals("student")) {
-                studentsArray.add(new Student(login, password, name, surname, role));
+
+            if (roleForList.equals("student")) {
+                userList.add(new User(Integer.parseInt(id), login, password, name, surname, role));
+            } else if (roleForList.equals("mentor")) {
+                userList.add(new User(Integer.parseInt(id), login, password, name, surname, role));
+            } else if (roleForList.equals("manager")) {
+                userList.add(new User(Integer.parseInt(id), login, password, name, surname, role ));
+            } else if (roleForList.equals("regularEmployee")) {
+                userList.add(new User(Integer.parseInt(id), login, password, name, surname, role ));
             }
         }
-        return studentsArray;
+        return userList;
     }
 }

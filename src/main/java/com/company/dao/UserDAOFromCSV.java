@@ -23,7 +23,7 @@ public class UserDAOFromCSV implements UserDAO {
 
     public UserDAOFromCSV() { // with parameter??
         this.csvParser = new CsvParser(filepathOfUsersCsv);
-        listOfRecords = new ArrayList<>();
+        listOfRecords = csvParser.getUpdatedList();
     }
 
     public CsvParser getCsvParser() {
@@ -63,6 +63,25 @@ public class UserDAOFromCSV implements UserDAO {
             }
         }
         return this.user;
+    }
+
+    public List<User> extractUserFromListByRoleGiven(String roleForList) {
+        String id, login, password, name, surname, role;
+        List<User> userList = new ArrayList<>();
+        for (int i = 0; i < this.listOfRecords.size(); i++) {
+            List<String> users = this.listOfRecords.get(i);
+            id = users.get(0);
+            login = users.get(1);
+            password = "*************";
+            name = users.get(3);
+            surname = users.get(4);
+            role = users.get(5);
+
+            if (roleForList.equals(role)) {
+                userList.add(new User(Integer.parseInt(id), login, password, name, surname, role));
+            }
+        }
+        return userList;
     }
 
     @Override

@@ -29,7 +29,7 @@ public class App {
 
 //         System.out.println("Hello World!");
 
-//         CsvParser csvParser = new CsvParser("src/main/resources/users.csv");
+         CsvParser csvParser = new CsvParser("src/main/resources/users.csv");
 
 //         System.out.println("List of lists from file = " + csvParser.getUpdatedList());
 //         System.out.println("size = " + csvParser.getUpdatedList().size());
@@ -53,9 +53,9 @@ public class App {
         View view = new View();
 
         System.out.println("*****************");
-        view.viewAllStudents(studentDAO.extractUserFromList(csvParser.getListOfLines()));
-        System.out.println("*****************");
-        view.viewAllStudents(mentorDAO.extractUserFromList(csvParser.getListOfLines()));
+//        view.viewAllStudents(studentDAO.extractUserFromList(csvParser.getListOfLines()));
+//        System.out.println("*****************");
+//        view.viewAllStudents(mentorDAO.extractUserFromList(csvParser.getListOfLines()));
 
 
         User manager = new ManagerDAO().readManager();

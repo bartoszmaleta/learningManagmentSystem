@@ -17,9 +17,9 @@ import java.util.Scanner;
 
 public class ManagerController implements Employee{
     private User user;
-    private List <Mentor> mentorList;
-    private List <Student> studentsList;
-    private List <RegularEmployee> regularEmployees;
+    private List <User> mentorList;
+    private List <User> studentsList;
+    private List <User> regularEmployees;
     Scanner scanner = new Scanner(System.in);
 
     public ManagerController(User user) {
@@ -52,7 +52,7 @@ public class ManagerController implements Employee{
                     ManagerMenu.displayFirstEditingMentorMenu();
                     View.viewAllMentors(mentorList);
                     String usernameOfMentorToEdit = TerminalManager.askForString("\n" + "Enter username of mentor you want to edit: ");
-                    Mentor mentorToEdit = getMentorFromListByUsername(usernameOfMentorToEdit);
+                    User mentorToEdit = getMentorFromListByUsername(usernameOfMentorToEdit);
                     ManagerMenu.displaySecondEditingMentorMenu();
                     editMentor(mentorToEdit);
                     break;
@@ -66,15 +66,15 @@ public class ManagerController implements Employee{
     }
 
 
-    public void addMentor(Mentor mentor) {
+    public void addMentor(User mentor) {
         mentorList.add(mentor);
     }
 
-    public void removeMentor(Mentor mentor) {
+    public void removeMentor(User mentor) {
         mentorList.remove(mentor);
     }
 
-    public void editMentor(Mentor mentor) {
+    public void editMentor(User mentor) {
         int option = TerminalManager.takeIntInputWithoutMessage();
         switch(option) {
             case 1:
@@ -115,16 +115,19 @@ public class ManagerController implements Employee{
         return new Mentor(id, username, password, name, surname, "mentor");
     }
 
-    public Mentor getMentorFromListByUsername(String username) {
-        for(Mentor mentor: mentorList) {
-            if(mentor.getUsername().equals(username)) {
-                return mentor;
+    public User getMentorFromListByUsername(String username) {
+        for(User user : mentorList) {
+            if (user.getRole().equals("mentor")) {
+                if(user.getUsername().equals(username)) {
+                    return user;
+                }
             }
         }
         return null;
     }
 
     public void displayMentors() {
+
         View.viewAllMentors(mentorList);
     }
 

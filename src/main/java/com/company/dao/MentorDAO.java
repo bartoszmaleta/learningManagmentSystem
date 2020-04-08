@@ -40,7 +40,7 @@ public class MentorDAO implements UserDAO {
             surname = mentors.get(4);
             role = mentors.get(5);
             if (role.equals("mentor")) {
-                mentorsArray.add(new Mentor(login, password, name, surname, role));
+                mentorsArray.add(new Mentor(Integer.parseInt(id), login, password, name, surname, role));
             }
         }
         return mentorsArray;
