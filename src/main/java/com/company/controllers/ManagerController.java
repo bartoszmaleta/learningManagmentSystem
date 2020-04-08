@@ -3,6 +3,7 @@ package com.company.controllers;
 import com.company.dao.MentorDAO;
 import com.company.dao.RegularEmployeeDAO;
 import com.company.dao.StudentDAO;
+import com.company.dao.UserDAOFromCSV;
 import com.company.models.users.User;
 import com.company.models.users.employees.Mentor;
 import com.company.models.users.employees.RegularEmployee;
@@ -19,12 +20,17 @@ public class ManagerController implements Employee{
     private User user;
     private List <User> mentorList;
     private List <User> studentsList;
-    private List <User> regularEmployees;
+    private List <User> regularEmployeesList;
     Scanner scanner = new Scanner(System.in);
+    UserDAOFromCSV userDAOFromCSV;
 
     public ManagerController(User user) {
         System.out.println("Manager Controller constructor here");
+        userDAOFromCSV = new UserDAOFromCSV();
         this.user = user;
+        mentorList = new UserDAOFromCSV().extractUserFromListByRoleGiven("mentor");
+        studentsList = new UserDAOFromCSV().extractUserFromListByRoleGiven("student");
+        regularEmployeesList = new UserDAOFromCSV().extractUserFromListByRoleGiven("regularEmployee");
     }
 
 
@@ -56,6 +62,8 @@ public class ManagerController implements Employee{
                     ManagerMenu.displaySecondEditingMentorMenu();
                     editMentor(mentorToEdit);
                     break;
+                case 4:
+                    displayMentors();
                 case 0:
                     isRunning = false;
                     break;
@@ -72,6 +80,7 @@ public class ManagerController implements Employee{
 
     public void removeMentor(User mentor) {
         mentorList.remove(mentor);
+        userDAOFromCSV.remove(mentor);
     }
 
     public void editMentor(User mentor) {

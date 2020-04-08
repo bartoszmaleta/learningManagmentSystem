@@ -14,7 +14,7 @@ public class RegularEmployeeDAO implements UserDAO {
     }
 
     @Override
-    public void update(User user) {
+    public void edit(User user) {
 
     }
 
