@@ -19,9 +19,9 @@ public class App {
 ////        logging.init();
 ////        __________________________________________________________
 //
-
-        System.out.println("list from file with added record = " + csvParser.getUpdatedList());
-        System.out.println("new size = " + csvParser.getUpdatedList().size());
+//
+//        System.out.println("list from file with added record = " + csvParser.getUpdatedList());
+//        System.out.println("new size = " + csvParser.getUpdatedList().size());
 
         //
         System.out.println("------------");

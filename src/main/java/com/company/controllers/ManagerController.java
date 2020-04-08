@@ -27,7 +27,6 @@ public class ManagerController implements Employee{
         this.user = user;
     }
 
-
     public void init() {
         boolean isRunning = true;
 //        TerminalView.displayWelcomeScreen();
@@ -136,7 +135,4 @@ public class ManagerController implements Employee{
         View.viewAllStudents(studentsList);
     }
 
-    public void init() {        System.out.println("Manager Controller init here ");
-
-    }
 }
