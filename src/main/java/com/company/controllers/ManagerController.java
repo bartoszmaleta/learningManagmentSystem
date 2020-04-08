@@ -135,5 +135,6 @@ public class ManagerController implements Employee{
     }
     @Override
     public void displayStudents() {
+        View.viewAllStudents(studentsList);
     }
 }
