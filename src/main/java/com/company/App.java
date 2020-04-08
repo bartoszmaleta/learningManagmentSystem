@@ -1,6 +1,12 @@
 package com.company;
 
 import com.company.dao.Parser.CsvParser;
+import com.company.dao.StudentDAO;
+import com.company.models.users.User;
+import com.company.models.users.students.Student;
+import com.company.view.View;
+
+import java.util.ArrayList;
 
 /**
  * Hello world!
@@ -20,14 +26,22 @@ public class App {
         System.out.println("size = " + csvParser.getUpdatedList().size());
 
 
-        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
-        csvParser.addNewRecord(recordToAdd);
+//        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
+//        csvParser.addNewRecord(recordToAdd);
 //
         System.out.println("list from file with added record = " + csvParser.getUpdatedList());
         System.out.println("new size = " + csvParser.getUpdatedList().size());
 
         //
         System.out.println("------------");
+        StudentDAO studentDAO = new StudentDAO();
+
+        View view = new View();
+
+        System.out.println("*****************");
+        view.viewAllStudents(studentDAO.extractUserFromList(csvParser.getListOfLines()));
+        System.out.println("*****************");
+
 
         //        users.csv
 //                id,username,password,name,surname,role,
