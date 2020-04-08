@@ -34,12 +34,13 @@ public class UserDAOFromCSV implements UserDAO {
     @Override
     public void write(User user) {
         String[] toStringArrayUser = toStringArray(user);
-        csvParser.addNewRecord(toStringArrayUser);
+        this.csvParser.addNewRecord(toStringArrayUser);
     }
 
     private String[] toStringArray(User user) {
         String[] userArray = {String.valueOf(user.getId())
                 , user.getUsername()
+                , user.getPassword()
                 , user.getName()
                 , user.getSurname()
                 , user.getRole()};
@@ -104,7 +105,7 @@ public class UserDAOFromCSV implements UserDAO {
         for (int i = 0; i < this.listOfRecords.size(); i++) {
             if (this.listOfRecords.get(i).get(0).equals(String.valueOf(user.getId()))) {
                 this.listOfRecords.get(i).set(1, user.getUsername());
-//                this.listOfRecords.get(i).set(2, user.getPassword()); // can't!
+                this.listOfRecords.get(i).set(2, user.getPassword()); // can't!
                 this.listOfRecords.get(i).set(3, user.getName());
                 this.listOfRecords.get(i).set(4, user.getSurname());
                 this.listOfRecords.get(i).set(5, user.getRole());
@@ -123,5 +124,13 @@ public class UserDAOFromCSV implements UserDAO {
     private String toString(User user) {
 
         return null;
+    }
+
+    public int getLastIndex() {
+        String lastElementIdString = this.listOfRecords.
+                get(listOfRecords.size() - 1).
+                get(idIndex);
+
+        return Integer.parseInt(lastElementIdString);
     }
 }
