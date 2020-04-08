@@ -2,7 +2,7 @@ package com.company.dao;
 
 import com.company.models.users.User;
 
-public class MentorDAO implements CsvDAO {
+public class MentorDAO implements UserDAO {
     @Override
     public void write(User user) {
 
@@ -19,7 +19,7 @@ public class MentorDAO implements CsvDAO {
     }
 
     @Override
-    public void read(User user) {
-
+    public User read(User user) {
+        return null;
     }
 }

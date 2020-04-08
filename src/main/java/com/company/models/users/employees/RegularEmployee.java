@@ -4,7 +4,7 @@ import com.company.models.users.User;
 
 public class RegularEmployee extends User {
 
-    public RegularEmployee(String username, String password, String name, String surname, String role) {
-        super(username, password, name, surname, role);
+    public RegularEmployee(int id, String username, String password, String name, String surname, String role) {
+        super(id, username, password, name, surname, role);
     }
 }

@@ -66,7 +66,7 @@ public class CsvParser implements Parser {
 
     @Override
     public void addNewRecord(String[] newRecord) {
-        String newLineToFile = "\n" + String.join(",", newRecord) + ",";
+//        String newLineToFile = "\n" + String.join(",", newRecord) + ",";
         try {
             FileWriter fw = new FileWriter(this.fileName, true);
             fw.append("\n" + String.join(",", newRecord) + ",");

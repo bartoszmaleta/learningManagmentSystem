@@ -1,6 +1,9 @@
 package com.company;
 
+import com.company.dao.ManagerDAO;
 import com.company.dao.Parser.CsvParser;
+import com.company.models.users.User;
+import com.company.models.users.employees.Manager;
 
 /**
  * Hello world!
@@ -29,6 +32,9 @@ public class App {
         //
         System.out.println("------------");
 
+        User manager = new ManagerDAO().readManager();
+        String managerName = manager.getName();
+        System.out.println(managerName);
         //        users.csv
 //                id,username,password,name,surname,role,
 //                1,bartoszmal,password1,bartosz,maleta,student
