@@ -103,7 +103,7 @@ public class ManagerController implements Employee{
                 String name = TerminalManager.askForString("Enter mentor's new name: ");
                 mentor.setName(name);
                 String surname = TerminalManager.askForString("Enter mentor's new surname: ");
-                mentor.setSurname(surname;
+                mentor.setSurname(surname);
                 break;
         }
     }
