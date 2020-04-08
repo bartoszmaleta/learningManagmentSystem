@@ -18,9 +18,9 @@ import java.util.Scanner;
 
 public class ManagerController implements Employee{
     private User user;
-    private List <User> mentorList;
-    private List <User> studentsList;
-    private List <User> regularEmployeesList;
+    private List<User> mentorList;
+    private List<User> studentsList;
+    private List<User> regularEmployeesList;
     Scanner scanner = new Scanner(System.in);
     UserDAOFromCSV userDAOFromCSV;
 
