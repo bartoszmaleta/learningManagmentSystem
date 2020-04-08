@@ -2,8 +2,10 @@ package com.company;
 
 import com.company.dao.ManagerDAO;
 import com.company.dao.Parser.CsvParser;
+import com.company.dao.StudentDAO;
 import com.company.models.users.User;
 import com.company.models.users.employees.Manager;
+import com.company.models.users.students.Student;
 
 /**
  * Hello world!
@@ -37,11 +39,14 @@ public class App {
         System.out.println(managerName);
 
         System.out.println("------------");
-        CsvParser csvParser2 = new CsvParser("src/main/resources/grades.csv");
-        csvParser.updateFile(csvParser2.getUpdatedList(), "trala");
-        System.out.println("updated list with new list = " + csvParser.getUpdatedList());
+        // update try! works!
+        //        CsvParser csvParser2 = new CsvParser("src/main/resources/grades.csv");
+//        csvParser.updateFile(csvParser2.getUpdatedList(), "trala");
+//        System.out.println("updated list with new list = " + csvParser.getUpdatedList());
 
 
+        User student = new StudentDAO().readUserByUsernameAndPassword("bartoszmal", "password1");
+        System.out.println(student.getName());
         //        users.csv
 //                id,username,password,name,surname,role,
 //                1,bartoszmal,password1,bartosz,maleta,student

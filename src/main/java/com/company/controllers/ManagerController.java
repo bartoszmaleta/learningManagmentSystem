@@ -13,6 +13,10 @@ public class ManagerController implements Employee{
     private ArrayList <Student> studentsList;
     private ArrayList <RegularEmployee> regularEmployees;
 
+    public ManagerController(User user) {
+        System.out.println("Manager Controller constructor here");
+        this.user = user;
+    }
 
     public void addMentor(Mentor mentor) {
 
@@ -28,6 +32,10 @@ public class ManagerController implements Employee{
 
     @Override
     public void displayStudents() {
+
+    }
+
+    public void init() {        System.out.println("Manager Controller init here ");
 
     }
 }
