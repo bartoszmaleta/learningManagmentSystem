@@ -22,13 +22,11 @@ public class ManagerController implements Employee{
     private List <RegularEmployee> regularEmployees;
     Scanner scanner = new Scanner(System.in);
 
-    public  ManagerController(User user) {
+    public ManagerController(User user) {
+        System.out.println("Manager Controller constructor here");
         this.user = user;
-//        this.mentorList = new MentorDAO().readAllMentors();
-//        this.studentsList = new StudentDAO().readAllStudents();
-//        this.regularEmployees = new RegularEmployeeDAO().readAllRegularEmployees();
-
     }
+
 
     public void init() {
         boolean isRunning = true;
@@ -136,5 +134,9 @@ public class ManagerController implements Employee{
     @Override
     public void displayStudents() {
         View.viewAllStudents(studentsList);
+    }
+
+    public void init() {        System.out.println("Manager Controller init here ");
+
     }
 }
