@@ -27,6 +27,7 @@ public class ManagerController implements Employee{
         this.user = user;
     }
 
+
     public void init() {
         boolean isRunning = true;
 //        TerminalView.displayWelcomeScreen();
