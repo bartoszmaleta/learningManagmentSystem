@@ -1,6 +1,9 @@
 package com.company;
 
+import com.company.dao.ManagerDAO;
 import com.company.dao.Parser.CsvParser;
+import com.company.models.users.User;
+import com.company.models.users.employees.Manager;
 
 /**
  * Hello world!
@@ -20,8 +23,8 @@ public class App {
         System.out.println("size = " + csvParser.getUpdatedList().size());
 
 
-        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
-        csvParser.addNewRecord(recordToAdd);
+//        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
+//        csvParser.addNewRecord(recordToAdd);
 //
         System.out.println("list from file with added record = " + csvParser.getUpdatedList());
         System.out.println("new size = " + csvParser.getUpdatedList().size());
@@ -29,6 +32,9 @@ public class App {
         //
         System.out.println("------------");
 
+        User manager = new ManagerDAO().readManager();
+        String managerName = manager.getName();
+        System.out.println(managerName);
         //        users.csv
 //                id,username,password,name,surname,role,
 //                1,bartoszmal,password1,bartosz,maleta,student
