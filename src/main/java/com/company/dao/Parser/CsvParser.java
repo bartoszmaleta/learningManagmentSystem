@@ -98,8 +98,3 @@ public class CsvParser implements Parser {
         }
     }
 }
-
-//id, username, password, name, surname, role,
-//        1,bartosz,maleta,admin,
-//        2,john,smith,employee
-//        3,Aqwe,qwe,/
