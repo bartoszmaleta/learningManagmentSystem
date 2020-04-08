@@ -1,5 +1,7 @@
 package com.company.dao.Parser;
 
+import com.company.models.users.User;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

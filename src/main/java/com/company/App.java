@@ -1,5 +1,13 @@
 package com.company;
 
+import com.company.dao.MentorDAO;
+import com.company.dao.Parser.CsvParser;
+import com.company.dao.StudentDAO;
+import com.company.models.users.User;
+import com.company.models.users.students.Student;
+import com.company.view.View;
+
+import java.util.ArrayList;
 import com.company.controllers.ManagerController;
 import com.company.dao.ManagerDAO;
 import com.company.dao.Parser.CsvParser;
@@ -14,6 +22,21 @@ import com.company.models.users.employees.Mentor;
  */
 public class App {
     public static void main(String[] args) {
+//        __________________________________________________________
+//        LoggingController logging = new LoggingController();
+//        logging.init();
+//        __________________________________________________________
+
+//         System.out.println("Hello World!");
+
+//         CsvParser csvParser = new CsvParser("src/main/resources/users.csv");
+
+//         System.out.println("List of lists from file = " + csvParser.getUpdatedList());
+//         System.out.println("size = " + csvParser.getUpdatedList().size());
+
+
+//        String[] recordToAdd = {"5", "lizhenli", "password5", "li", "zhen", "student"};
+//        csvParser.addNewRecord(recordToAdd);
 ////        __________________________________________________________
 ////        LoggingController logging = new LoggingController();
 ////        logging.init();
@@ -25,6 +48,15 @@ public class App {
 
         //
         System.out.println("------------");
+        StudentDAO studentDAO = new StudentDAO();
+        MentorDAO mentorDAO = new MentorDAO();
+        View view = new View();
+
+        System.out.println("*****************");
+        view.viewAllStudents(studentDAO.extractUserFromList(csvParser.getListOfLines()));
+        System.out.println("*****************");
+        view.viewAllStudents(mentorDAO.extractUserFromList(csvParser.getListOfLines()));
+
 
         User manager = new ManagerDAO().readManager();
         String managerName = manager.getName();
