@@ -1,5 +1,6 @@
-package com.company.dao;
+package com.company.dao.notUsedDao;
 
+import com.company.dao.UserDao;
 import com.company.models.users.User;
 
 import java.util.List;
