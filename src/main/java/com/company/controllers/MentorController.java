@@ -1,11 +1,14 @@
 package com.company.controllers;
 
 import com.company.dao.AssignmentDaoFromCsv;
+import com.company.dao.ClassesDaoFromCsv;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
+import com.company.models.Class;
 import com.company.models.users.User;
 import com.company.models.users.students.Student;
 import com.company.service.TerminalManager;
+import com.company.service.TerminalView;
 import com.company.view.View;
 import com.company.view.menu.MentorMenu;
 
@@ -18,44 +21,61 @@ public class MentorController implements EmployeeController {
     UserDaoFromCSV userDaoFromCSV;
     private List<User> studentsList;
     private HashMap<String, ArrayList<User>> classes;
-    private List <Assignment> assignmentsList;
+    private List<Assignment> assignmentsList;
     private AssignmentDaoFromCsv assignmentDaoFromCsv;
+    private ClassesDaoFromCsv classesDaoFromCsv;
+    private List<Class> classesList;
 
     public MentorController(User user) {
         this.user = user;
+
         userDaoFromCSV = new UserDaoFromCSV();
         studentsList = userDaoFromCSV.extractUsersFromListOfRecordsByRoleGiven("student");
+
         assignmentDaoFromCsv = new AssignmentDaoFromCsv();
         assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
-        System.out.println(assignmentsList);
+
+        classesDaoFromCsv = new ClassesDaoFromCsv();
+//        classesList = classesDaoFromCsv.extractClassesFromListByMentorName(this.user.getName());
+        classesList = classesDaoFromCsv.extractAllClassesFromList();
     }
 
 
-    public void init()  {
+    public void init() {
         boolean isRunning = true;
 
-        while(isRunning) {
-    //        TerminalView.clearScreen();
+        while (isRunning) {
+            //        TerminalView.clearScreen();
             MentorMenu.displayMenu();
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
-            switch(choice) {
+            switch (choice) {
                 case 1:
                     displayStudents();
                     break;
                 case 2:
-//                    displayStudents();
-//                    addStudentToClass();
+                    displayStudents();
+                    int studentIdToAddToClass = TerminalManager.askForInt("Enter id of student You want to add to class");
+                    User studentToClass = getStudentFromListById(studentIdToAddToClass);
+
+                    displayAllClasses();
+//                    displayAllClassesNames();
+                    String className = TerminalManager.askForString("Enter name of class to which add student: ");
+                    Class classToAdd = getClassFromListByClassName(studentToClass, className);
+
+                    addStudentToClass(classToAdd);
                     break;
                 case 3:
-//                    removeStudentFromClass();
+                    displayAllClasses();
+                    Class classFromWhichStudentShouldBeRemoved = getClassFromProvidedData();
+                    removeStudentFromClass(classFromWhichStudentShouldBeRemoved);
                     break;
                 case 4:
                     MentorMenu.displayFirstEditingStudentMenu();
                     displayStudents();
 //                    String studentUsernameToEdit = TerminalManager.askForString("Enter username of student you want to edit");
 //                    User studentToEdit = getStudentFromListByUsername(studentUsernameToEdit);
-                    int studentId = TerminalManager.askForInt("Enter id of student you want to edit");
+                    int studentId = TerminalManager.askForInt("Enter id of student You want to edit");
                     User studentToEdit = getStudentFromListById(studentId);
                     MentorMenu.displaySecondEditingStudentMenu();
                     editStudent(studentToEdit);
@@ -76,27 +96,61 @@ public class MentorController implements EmployeeController {
                 case 7:
                     // TODO
                     checkAttendence();
+                    break;
+                case 8:
+                    // TODO: to check!
+                    displayMyStudents();
+                    break;
                 case 0:
                     isRunning = false;
                     break;
                 default:
                     System.out.println("Wrong input!");
-
             }
         }
     }
 
+    private void displayMyStudents() {
+        List<Class> myClasses = classesDaoFromCsv.extractClassesFromListByMentorName(this.user.getName());
+        View.viewAllClasses(myClasses);
+    }
+
+    private void displayAllClasses() {
+        View.viewAllClasses(classesList);
+    }
+
+    private Class getClassFromProvidedData() {
+        String studentUsernameToRemove = TerminalManager.askForString("Enter username of student You want to remove from class");
+        String classToRemove = TerminalManager.askForString("Enter name of class You want to remove student from: ");
+
+        for (Class classOb : classesList) {
+            if (classOb.getStudentUsername().equals(studentUsernameToRemove)
+                    && classOb.getTitle().equals(classToRemove)) {
+                return classOb;
+            }
+        }
+        TerminalManager.printString("No class found. Provide better data!");
+        return null;
+    }
+
+    private Class getClassFromListByClassName(User student, String className) {
+        int id = this.classesList.get(this.classesList.size() - 1).getId() + 1;
+        String studentName = student.getName();
+        String mentorName = this.user.getName();
+
+        return new Class(id, className, studentName, mentorName);
+    }
+
+    private void displayAllClassesNames() {
+        View.viewClassesNames(classesList);
+//        View.viewAllClasses(classesList);
+    }
+
     private Assignment getAssignmentFromProvidedData() {
-        System.out.println("1");
 //        int id = this.assignmentDaoFromCsv.getLastIndex() + 1;
         int id = this.assignmentsList.get(this.assignmentsList.size() - 1).getId() + 1;
-        System.out.println("2");
-
         String title = TerminalManager.askForString("Enter title of assignment: ");
-        System.out.println("1");
-
         String studentUsername = TerminalManager.askForString("Enter student's username: ");
-        System.out.println("1");
 
         return new Assignment(id, title, studentUsername, this.user.getName(), false);
     }
@@ -110,12 +164,14 @@ public class MentorController implements EmployeeController {
 
     }
 
-    public void addStudentToClass(Student student) {
-
+    public void addStudentToClass(Class classToAdd) {
+        this.classesList.add(classToAdd);
+        this.classesDaoFromCsv.write(classToAdd);
     }
 
-    public void removeStudentFromClass(Student student) {
-
+    public void removeStudentFromClass(Class classToRemoveFrom) {
+        this.classesList.remove(classToRemoveFrom);
+        this.classesDaoFromCsv.remove(classToRemoveFrom);
     }
 
     public void checkAttendence() {
@@ -123,8 +179,8 @@ public class MentorController implements EmployeeController {
     }
 
     public User getStudentFromListByUsername(String username) {
-        for(User user: studentsList) {
-            if(user.getUsername().equals(username)) {
+        for (User user : studentsList) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
@@ -132,8 +188,8 @@ public class MentorController implements EmployeeController {
     }
 
     public User getStudentFromListById(int id) {
-        for(User user: studentsList) {
-            if(user.getId() == id) {
+        for (User user : studentsList) {
+            if (user.getId() == id) {
                 return user;
             }
         }
@@ -142,7 +198,7 @@ public class MentorController implements EmployeeController {
 
     public void editStudent(User student) {
         int option = TerminalManager.takeIntInputWithoutMessage();
-        switch(option) {
+        switch (option) {
             case 1:
                 String newUsername = TerminalManager.askForString("Enter student's new username: ");
                 student.setUsername(newUsername);
@@ -162,7 +218,7 @@ public class MentorController implements EmployeeController {
             case 5:
                 String username = TerminalManager.askForString("Enter student's new username: ");
                 student.setUsername(username);
-                String password= TerminalManager.askForString("Enter student's new password: ");
+                String password = TerminalManager.askForString("Enter student's new password: ");
                 student.setPassword(password);
                 String name = TerminalManager.askForString("Enter student's new name: ");
                 student.setName(name);

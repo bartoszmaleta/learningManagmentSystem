@@ -20,6 +20,9 @@ public class User {
         this.role = role;
     }
 
+    public User(User originalHero) {
+    }
+
     public String getUsername() {
         return username;
     }

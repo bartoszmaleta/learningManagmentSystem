@@ -73,8 +73,8 @@ public class UserDaoFromCSV implements UserDao {
             List<String> users = this.listOfRecords.get(i);
             id = users.get(0);
             login = users.get(1);
-            password = "*************";
-//            password = users.get(2);
+//            password = "*************";
+            password = users.get(2);
             name = users.get(3);
             surname = users.get(4);
             role = users.get(5);
