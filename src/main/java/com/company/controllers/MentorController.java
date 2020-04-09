@@ -64,9 +64,15 @@ public class MentorController implements Employee {
                     addAssignment(assignmentToAdd);
                     break;
                 case 6:
+                    // TODO
+                    displayStudents();
+//                    int studentId = TerminalManager.askForInt("Enter id of student You want to grade");
+//                    User studentToEdit = getStudentFromListById(studentId);
+//
 //                    gradeStudentAssignment();
                     break;
                 case 7:
+                    // TODO
                     checkAttendence();
                 case 0:
                     isRunning = false;
@@ -162,6 +168,4 @@ public class MentorController implements Employee {
     public void displayStudents() {
         View.viewAllStudents(studentsList);
     }
-
-
 }
