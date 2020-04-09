@@ -3,7 +3,6 @@ package com.company;
 import com.company.controllers.LoginController;
 import com.company.controllers.MentorController;
 import com.company.dao.Parser.CsvParser;
-import com.company.dao.UserDAOFromCSV;
 import com.company.models.users.User;
 import com.company.view.View;
 
@@ -20,7 +19,7 @@ public class App2 {
 //
 //        System.out.println(students);
 //        View.viewAllStudents(students);
-        MentorController mentorController = new MentorController(new User(1, "2", "3", "4", "5", "6"));
-        mentorController.init();
+//        MentorController mentorController = new MentorController(new User(1, "2", "3", "4", "5", "6"));
+//        mentorController.init();
     }
 }
