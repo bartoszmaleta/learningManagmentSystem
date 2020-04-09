@@ -1,6 +1,7 @@
-package com.company.dao;
+package com.company.dao.notUsedDao;
 
 import com.company.dao.Parser.CsvParser;
+import com.company.dao.UserDao;
 import com.company.models.users.User;
 import com.company.models.users.students.Student;
 
@@ -36,7 +37,8 @@ public class StudentDao implements UserDao {
         csvParser.addNewRecord(toStringArrayStudent);
     }
 
-    private String[] toStringArray(User user) {
+    @Override
+    public String[] toStringArray(User user) {
         String[] studentArray = {String.valueOf(user.getId())
                 , user.getUsername()
                 , user.getName()
@@ -55,12 +57,6 @@ public class StudentDao implements UserDao {
 
     }
 
-    @Override
-    public User read(User user) {
-
-        return null;
-    }
-
     public User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven) {
         this.listOfRecords = csvParser.getUpdatedList();
         System.out.println(this.listOfRecords);
@@ -77,6 +73,16 @@ public class StudentDao implements UserDao {
             }
         }
         return this.student;
+    }
+
+    @Override
+    public List<User> extractUserFromListByRoleGiven(String roleForList) {
+        return null;
+    }
+
+    @Override
+    public int getLastIndex() {
+        return 0;
     }
 
     public List<User> extractUserFromList(List<List<String>> listOfStudents, String roleForList) {
