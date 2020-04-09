@@ -2,19 +2,12 @@ package com.company.dao;
 
 import com.company.dao.Parser.CsvParser;
 import com.company.models.users.User;
-import com.company.models.users.employees.Mentor;
 import com.company.models.users.students.Student;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.models.users.employees.Manager;
-import com.company.models.users.students.Student;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class StudentDAO implements UserDAO {
+public class StudentDao implements UserDao {
     int idIndex = 0;
     int usernameIndex = 1;
     int passwordIndex = 2;
@@ -27,7 +20,7 @@ public class StudentDAO implements UserDAO {
     private Student student;
     private String filepathOfUsersCsv = "src/main/resources/users.csv";
 
-    public StudentDAO() {
+    public StudentDao() {
         this.csvParser = new CsvParser(filepathOfUsersCsv);
         listOfRecords = new ArrayList<>();
     }

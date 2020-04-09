@@ -7,7 +7,7 @@ import com.company.models.users.employees.Manager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerDAO implements UserDAO {
+public class ManagerDao implements UserDao {
 
     int idIndex = 0;
     int usernameIndex = 1;
@@ -21,7 +21,7 @@ public class ManagerDAO implements UserDAO {
     private List<List<String>> listOfRecords;
     private Manager manager;
     private String filepathOfUsersCsv = "src/main/resources/users.csv";
-    public ManagerDAO() { // with parameter??
+    public ManagerDao() { // with parameter??
         this.csvParser = new CsvParser(filepathOfUsersCsv);
         listOfRecords = new ArrayList<>();
     }
@@ -36,13 +36,28 @@ public class ManagerDAO implements UserDAO {
         csvParser.addNewRecord(toStringArrayManager);
     }
 
-    private String[] toStringArray(User user) {
+    public String[] toStringArray(User user) {
         String[] managaerArray = {String.valueOf(user.getId())
                 , user.getUsername()
                 , user.getName()
                 , user.getSurname()
                 , user.getRole()};
         return managaerArray;
+    }
+
+    @Override
+    public User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven) {
+        return null;
+    }
+
+    @Override
+    public List<User> extractUserFromListByRoleGiven(String roleForList) {
+        return null;
+    }
+
+    @Override
+    public int getLastIndex() {
+        return 0;
     }
 
     public User readManager() {
@@ -68,11 +83,6 @@ public class ManagerDAO implements UserDAO {
     @Override
     public void edit(User user) {
 
-    }
-
-    @Override
-    public User read(User user) {
-        return null;
     }
 
     private String toString(User user) {

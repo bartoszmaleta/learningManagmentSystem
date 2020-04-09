@@ -1,18 +1,12 @@
 package com.company.controllers;
 
-import com.company.dao.MentorDAO;
-import com.company.dao.RegularEmployeeDAO;
-import com.company.dao.StudentDAO;
-import com.company.dao.UserDAOFromCSV;
+import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.models.users.employees.Mentor;
-import com.company.models.users.employees.RegularEmployee;
-import com.company.models.users.students.Student;
 import com.company.service.TerminalManager;
 import com.company.view.View;
 import com.company.view.menu.ManagerMenu;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,15 +16,15 @@ public class ManagerController implements Employee {
     private List<User> studentsList;
     private List<User> regularEmployeesList;
     Scanner scanner = new Scanner(System.in);
-    UserDAOFromCSV userDAOFromCSV;
+    UserDaoFromCSV userDAOFromCSV;
 
     public ManagerController(User user) {
         System.out.println("Manager Controller constructor here");
-        userDAOFromCSV = new UserDAOFromCSV();
+        userDAOFromCSV = new UserDaoFromCSV();
         this.user = user;
-        mentorList = new UserDAOFromCSV().extractUserFromListByRoleGiven("mentor");
-        studentsList = new UserDAOFromCSV().extractUserFromListByRoleGiven("student");
-        regularEmployeesList = new UserDAOFromCSV().extractUserFromListByRoleGiven("regularEmployee");
+        mentorList = new UserDaoFromCSV().extractUserFromListByRoleGiven("mentor");
+        studentsList = new UserDaoFromCSV().extractUserFromListByRoleGiven("student");
+        regularEmployeesList = new UserDaoFromCSV().extractUserFromListByRoleGiven("regularEmployee");
     }
 
 
@@ -143,7 +137,7 @@ public class ManagerController implements Employee {
     }
 
     public void displayMentors() {
-        View.viewAllMentors(new UserDAOFromCSV().extractUserFromListByRoleGiven("mentor"));
+        View.viewAllMentors(new UserDaoFromCSV().extractUserFromListByRoleGiven("mentor"));
     }
 
     public void getMentorFromList(Mentor mentor) {

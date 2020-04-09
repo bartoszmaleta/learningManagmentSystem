@@ -2,12 +2,11 @@ package com.company.dao;
 
 import com.company.models.users.User;
 import com.company.models.users.employees.Mentor;
-import com.company.models.users.students.Student;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MentorDAO implements UserDAO {
+public class MentorDao implements UserDao {
     @Override
     public void write(User user) {
 

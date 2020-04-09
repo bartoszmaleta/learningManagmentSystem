@@ -9,13 +9,13 @@ public class Assignment {
     private boolean isSubmitted = false;
     private String mentorName;
 
-    public Assignment(int id, String title, String studentUsername, int grade, boolean isSubmitted, String mentorName) {
+    public Assignment(int id, String title, String studentUsername, String mentorName,  boolean isSubmitted) {
         this.id = id;
         this.title = title;
         this.studentUsername = studentUsername;
-        this.grade = grade;
-        this.isSubmitted = isSubmitted;
+//        this.grade = grade;
         this.mentorName = mentorName;
+        this.isSubmitted = isSubmitted;
     }
 
     public int getId() {
@@ -34,7 +34,7 @@ public class Assignment {
         this.studentUsername = studentUsername;
     }
 
-    public boolean isSubmitted() {
+    public boolean getIsSubmitted() {
         return isSubmitted;
     }
 

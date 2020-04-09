@@ -1,5 +1,6 @@
 package com.company.controllers;
 
+import com.company.dao.AssignmentDAOFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
@@ -15,13 +16,13 @@ public class StudentController {
     private User user;
     private List<Assignment> assignments;
     private List<Grade> grades;
-    AssignmentDAOFromCSV assignmentDAOFromCSV;
+    AssignmentDAOFromCsv assignmentDAOFromCSV;
     GradesDAOFromCsv gradesDAOFromCsv;
 
 
     public StudentController(User user) {
         System.out.println("Student Controller constructor here");
-        assignments = assignmentDAOFromCSV.extractAssignmentListByUsername(user.getUsername());
+        assignments = assignmentDAOFromCSV.extractAssignmentsFromListByStudentUsername(user.getUsername());
         grades = gradesDAOFromCsv.extractGradesListByUsername(user.getUsername());
     }
 
