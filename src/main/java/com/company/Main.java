@@ -9,7 +9,7 @@ import com.company.view.View;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class App2 {
+public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         LoginController logging = new LoginController();
         logging.init();

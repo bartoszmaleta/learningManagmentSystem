@@ -1,5 +1,18 @@
 
-╔╦╗┌─┐┌┐┌┌┬┐┌─┐┬─┐  ╔╦╗┌─┐┌┐┌┬ ┬
-║║║├┤ │││ │ │ │├┬┘  ║║║├┤ ││││ │
-╩ ╩└─┘┘└┘ ┴ └─┘┴└─  ╩ ╩└─┘┘└┘└─┘
+            ╔╦╗┌─┐┌┐┌┌┬┐┌─┐┬─┐  ╔╦╗┌─┐┌┐┌┬ ┬
+            ║║║├┤ │││ │ │ │├┬┘  ║║║├┤ ││││ │
+            ╩ ╩└─┘┘└┘ ┴ └─┘┴└─  ╩ ╩└─┘┘└┘└─┘
 
+            Choose one of the following options: 
+
+            (1) Add assignment");
+            (2) Grade student assignment");
+            (3) Remove student from class");
+            (4) Check attendance");
+            (5) Class View
+            (6) WIP - ???");
+            (7) WIP - ???");
+            (8) WIP - ???");
+            (0) Log out");
+            
+            What is Your choice : 

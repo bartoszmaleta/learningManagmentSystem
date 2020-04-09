@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class DataHandler {
 
     public static void printFromFile(String filepath) throws FileNotFoundException {
-        TerminalManager.clearScreen();
+//        TerminalManager.clearScreen();
 
         Scanner input = new Scanner(new File(filepath));
 

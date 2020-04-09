@@ -2,6 +2,7 @@ package com.company.controllers;
 
 import com.company.dao.UserDAOFromCSV;
 import com.company.models.users.User;
+import com.company.service.DataHandler;
 import com.company.service.TerminalView;
 import com.company.view.menu.LoginMenu;
 
@@ -17,16 +18,20 @@ public class LoginController {
 
         while (isRunning) {
 //            TerminalView.clearScreen();
-            LoginMenu.display();
+            DataHandler.printFromFile("src/main/resources/Menu CcMS/Small/MainScreen");
+            DataHandler.printFromFile("src/main/resources/Menu CcMS/Small/MainMenu");
 
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
 //                    TODO: logging user
+                    DataHandler.printFromFile("src/main/resources/Menu CcMS/Small/MainMenu");
+
                     loggingUser();
                     break;
                 case 2:
+                    DataHandler.printFromFile("src/main/resources/Menu CcMS/Small/Credits");
 //                    TODO: show credits
                     break;
                 case 0:
