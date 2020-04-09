@@ -2,13 +2,11 @@ package com.company.dao;
 
 import com.company.dao.Parser.CsvParser;
 import com.company.models.users.User;
-import com.company.models.users.employees.Manager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class UserDAOFromCSV implements UserDAO {
+public class UserDaoFromCSV implements UserDao {
 
     int idIndex = 0;
     int usernameIndex = 1;
@@ -22,7 +20,7 @@ public class UserDAOFromCSV implements UserDAO {
     private User user;
     private String filepathOfUsersCsv = "src/main/resources/users.csv";
 
-    public UserDAOFromCSV() { // with parameter??
+    public UserDaoFromCSV() { // with parameter??
         this.csvParser = new CsvParser(filepathOfUsersCsv);
         listOfRecords = csvParser.getUpdatedList();
     }
@@ -37,7 +35,8 @@ public class UserDAOFromCSV implements UserDAO {
         this.csvParser.addNewRecord(toStringArrayUser);
     }
 
-    private String[] toStringArray(User user) {
+    @Override
+    public String[] toStringArray(User user) {
         String[] userArray = {String.valueOf(user.getId())
                 , user.getUsername()
                 , user.getPassword()
@@ -47,6 +46,7 @@ public class UserDAOFromCSV implements UserDAO {
         return userArray;
     }
 
+    @Override
     public User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven) {
         this.listOfRecords = csvParser.getUpdatedList();
 
@@ -67,6 +67,7 @@ public class UserDAOFromCSV implements UserDAO {
         return this.user;
     }
 
+    @Override
     public List<User> extractUserFromListByRoleGiven(String roleForList) {
         String id, login, password, name, surname, role;
         List<User> userList = new ArrayList<>();
@@ -95,7 +96,7 @@ public class UserDAOFromCSV implements UserDAO {
             }
         }
         newList = this.listOfRecords;
-        String header = "id, username, password, name, surname, role,";
+        String header = "id,username,password,name,surname,role,";
         this.csvParser.updateFile(newList, header);
     }
 
@@ -112,20 +113,17 @@ public class UserDAOFromCSV implements UserDAO {
             }
         }
         newList = this.listOfRecords;
-        String header = "id, username, password, name, surname, role,";
+        String header = "id,username,password,name,surname,role,";
         this.csvParser.updateFile(newList, header);
     }
 
-    @Override
-    public User read(User user) {
-        return null;
-    }
 
     private String toString(User user) {
 
         return null;
     }
 
+    @Override
     public int getLastIndex() {
         String lastElementIdString = this.listOfRecords.
                 get(listOfRecords.size() - 1).

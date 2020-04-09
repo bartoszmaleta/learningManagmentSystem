@@ -1,21 +1,14 @@
 package com.company;
 
-import com.company.dao.MentorDAO;
+import com.company.dao.MentorDao;
 import com.company.dao.Parser.CsvParser;
-import com.company.dao.StudentDAO;
+import com.company.dao.StudentDao;
 import com.company.models.users.User;
-import com.company.models.users.students.Student;
 import com.company.view.View;
 
-import java.util.ArrayList;
 import com.company.controllers.ManagerController;
-import com.company.dao.ManagerDAO;
-import com.company.dao.Parser.CsvParser;
-import com.company.dao.StudentDAO;
-import com.company.models.users.User;
+import com.company.dao.ManagerDao;
 import com.company.models.users.employees.Manager;
-import com.company.models.users.students.Student;
-import com.company.models.users.employees.Mentor;
 
 /**
  * Hello world!
@@ -48,8 +41,8 @@ public class App {
 
         //
         System.out.println("------------");
-        StudentDAO studentDAO = new StudentDAO();
-        MentorDAO mentorDAO = new MentorDAO();
+        StudentDao studentDAO = new StudentDao();
+        MentorDao mentorDAO = new MentorDao();
         View view = new View();
 
         System.out.println("*****************");
@@ -58,7 +51,7 @@ public class App {
 //        view.viewAllStudents(mentorDAO.extractUserFromList(csvParser.getListOfLines()));
 
 
-        User manager = new ManagerDAO().readManager();
+        User manager = new ManagerDao().readManager();
         String managerName = manager.getName();
         System.out.println(managerName);
 
@@ -69,7 +62,7 @@ public class App {
 //        System.out.println("updated list with new list = " + csvParser.getUpdatedList());
 
 
-        User student = new StudentDAO().readUserByUsernameAndPassword("bartoszmal", "password1");
+        User student = new StudentDao().readUserByUsernameAndPassword("bartoszmal", "password1");
         System.out.println(student.getName());
         //        users.csv
 //                id,username,password,name,surname,role,

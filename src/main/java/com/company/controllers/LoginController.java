@@ -1,6 +1,6 @@
 package com.company.controllers;
 
-import com.company.dao.UserDAOFromCSV;
+import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.service.TerminalView;
 import com.company.view.menu.LoginMenu;
@@ -47,10 +47,10 @@ public class LoginController {
         TerminalView.printString("User password: ");
         String password = scanner.nextLine();
 
-        if (new UserDAOFromCSV().readUserByUsernameAndPassword(username,password).getName()==null){
+        if (new UserDaoFromCSV().readUserByUsernameAndPassword(username,password).getName()==null){
             TerminalView.printString("Wrong username or password.");
         } else {
-            User user = new UserDAOFromCSV().readUserByUsernameAndPassword(username,password);
+            User user = new UserDaoFromCSV().readUserByUsernameAndPassword(username,password);
             System.out.println("userFound name = " + user.getName());
             System.out.println("userFound role = " + user.getRole());
 
