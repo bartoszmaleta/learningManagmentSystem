@@ -15,7 +15,7 @@ public class LoginController {
     Scanner scanner = new Scanner(System.in);
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
-    String location = absolutePath.toString();
+    String location = absolutePath.toString()+"/src/main/resources/Menu CcMS/Small/";
 
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
@@ -23,8 +23,8 @@ public class LoginController {
 
         while (isRunning) {
 //            TerminalView.clearScreen();
-            DataHandler.printFromFile(location + "/src/main/resources/Menu CcMS/Small/MainScreen");
-            DataHandler.printFromFile(location + "/src/main/resources/Menu CcMS/Small/MainMenu");
+            DataHandler.printFromFile(location + "MainScreen");
+            DataHandler.printFromFile(location + "MainMenu");
 //            DataHandler.printFromFile(location);
 
             int choice = scanner.nextInt();
@@ -33,13 +33,13 @@ public class LoginController {
                 case 1:
 //                    TODO: logging user
 
-                    DataHandler.printFromFile(location + "/src/main/resources/Menu CcMS/Small/MainScreen");
-                    DataHandler.printFromFile(location + "/src/main/resources/Menu CcMS/Small/MainMenu");
+                    DataHandler.printFromFile(location + "MainScreen");
+                    DataHandler.printFromFile(location + "MainMenu");
 
                     loggingUser();
                     break;
                 case 2:
-                    DataHandler.printFromFile(location + "/src/main/resources/Menu CcMS/Small/Credits");
+                    DataHandler.printFromFile(location + "Credits");
 //                    TODO: show credits
                     break;
                 case 0:
