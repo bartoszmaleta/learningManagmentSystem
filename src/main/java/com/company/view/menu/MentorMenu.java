@@ -12,9 +12,9 @@ public class MentorMenu {
         System.out.println("     (3) Display all classes and remove student from class");
         System.out.println("     (4) Edit student's data");
         System.out.println("     (5) Display all assignments and add assignment");
-        System.out.println("     (6) WIP Grade student assignments");
-        System.out.println("     (7) WIP Check attendence");
-        System.out.println("     (8) WIP* - See list of my students");
+        System.out.println("     (6) WIP - Grade student assignments");
+        System.out.println("     (7) WIP - Check attendence");
+        System.out.println("     (8) See list of my students");
         System.out.println("     (0) Log out");
         System.out.println();
         System.out.println("What is Your choice : ");

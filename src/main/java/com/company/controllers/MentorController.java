@@ -1,17 +1,23 @@
 package com.company.controllers;
 
 import com.company.dao.AssignmentDaoFromCsv;
+import com.company.dao.AttendenceDaoFromCsv;
 import com.company.dao.ClassesDaoFromCsv;
+import com.company.dao.Parser.CsvParser;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
+import com.company.models.Attendence;
 import com.company.models.Class;
 import com.company.models.users.User;
 import com.company.models.users.students.Student;
 import com.company.service.TerminalManager;
-import com.company.service.TerminalView;
 import com.company.view.View;
 import com.company.view.menu.MentorMenu;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,12 +42,11 @@ public class MentorController implements EmployeeController {
         assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
 
         classesDaoFromCsv = new ClassesDaoFromCsv();
-//        classesList = classesDaoFromCsv.extractClassesFromListByMentorName(this.user.getName());
         classesList = classesDaoFromCsv.extractAllClassesFromList();
     }
 
 
-    public void init() {
+    public void init() throws FileNotFoundException {
         boolean isRunning = true;
 
         while (isRunning) {
@@ -94,11 +99,12 @@ public class MentorController implements EmployeeController {
 //                    gradeStudentAssignment();
                     break;
                 case 7:
-                    // TODO
-                    checkAttendence();
+                    displayStudents();
+                    // TODO: to check!
+                    checkAttendence2();
+//                    displayAttendances();
                     break;
                 case 8:
-                    // TODO: to check!
                     displayMyStudents();
                     break;
                 case 0:
@@ -175,8 +181,50 @@ public class MentorController implements EmployeeController {
     }
 
     public void checkAttendence() {
+        Path path = Paths.get("");
+        Path absolutePath = path.toAbsolutePath();
+        String location = absolutePath.toString()+"/src/main/resources/attendences/";
 
+        String locationWithDate = location + "attendence" + LocalDate.now();
+        CsvParser csvParser = new CsvParser(locationWithDate);
 
+        String[] headers = {"id", "studentUsername", "date", "isPresent"};
+
+        for (int i = 0; i < this.studentsList.size(); i++) {
+            String isPresentStudent = TerminalManager.
+                    askForString("Is student with name "
+                            + this.studentsList.get(i).getName() + " present today?");
+            Attendence attendence = new Attendence(i + 1
+                    , LocalDate.now()
+                    , this.studentsList.get(i).getUsername()
+                    , isPresentStudent);
+            if (i == 0) {
+                csvParser.addFirstRecord(attendence.toStringArray(), headers);
+            } else {
+                csvParser.addNewRecord(attendence.toStringArray());
+            }
+        }
+    }
+
+    public void checkAttendence2() throws FileNotFoundException {
+        AttendenceDaoFromCsv attendenceDaoFromCsv = new AttendenceDaoFromCsv();
+
+        String[] headers = {"id", "studentUsername", "date", "isPresent"};
+
+        for (int i = 0; i < this.studentsList.size(); i++) {
+            String isPresentStudent = TerminalManager.
+                    askForString("Is student with name "
+                            + this.studentsList.get(i).getName() + " present today?");
+            Attendence attendence = new Attendence(i + 1
+                    , LocalDate.now()
+                    , this.studentsList.get(i).getUsername()
+                    , isPresentStudent);
+            if (i == 0) {
+                attendenceDaoFromCsv.writeFirstRecord(attendence, headers);
+            } else {
+                attendenceDaoFromCsv.write(attendence);
+            }
+        }
     }
 
     public User getStudentFromListByUsername(String username) {

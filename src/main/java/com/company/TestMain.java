@@ -1,7 +1,12 @@
 package com.company;
 
+import com.company.dao.Parser.CsvParser;
+import com.company.models.Attendence;
 import com.company.models.users.User;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,6 +40,27 @@ public class TestMain {
 
 
         List<String> clonedList = arrayListClone.stream().map(String::new).collect(Collectors.toList());
+
+        System.out.println("--------------------");
+
+        System.out.println(LocalDate.now().getDayOfYear());
+        System.out.println(LocalDate.now());
+
+        Path path = Paths.get("");
+        Path absolutePath = path.toAbsolutePath();
+        String location = absolutePath.toString()+"/src/main/resources/attendences/";
+
+        String locationWithDate = location + "attendence" + LocalDate.now();
+        System.out.println(locationWithDate);
+
+
+        System.out.println("--------------------");
+        CsvParser csvParser = new CsvParser(locationWithDate);
+        Attendence attendence = new Attendence(1, LocalDate.now(), "qwe", "y");
+//        csvParser.addFirstRecord(attendence.toStringArray());
+//        csvParser.addNewRecord(attendence.toStringArray());
+
+
 
     }
 }
