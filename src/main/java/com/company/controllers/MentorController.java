@@ -16,13 +16,14 @@ public class MentorController implements Employee {
     private User user;
     UserDAOFromCSV userDAOFromCSV;
     private List<User> studentsList;
-    private HashMap<String, ArrayList<User>> classes; //there will be class name as string
+    private HashMap<String, ArrayList<User>> classes;
     private List <Assignment> assignmentsList;
 
     public MentorController(User user) {
         this.user = user;
         userDAOFromCSV = new UserDAOFromCSV();
         studentsList = new UserDAOFromCSV().extractUserFromListByRoleGiven("student");
+
     }
 
 
@@ -39,6 +40,7 @@ public class MentorController implements Employee {
                     displayStudents();
                     break;
                 case 2:
+                    displayStudents();
 //                    addStudentToClass();
                     break;
                 case 3:
@@ -49,23 +51,24 @@ public class MentorController implements Employee {
                     displayStudents();
 //                    String studentUsernameToEdit = TerminalManager.askForString("Enter username of student you want to edit");
 //                    User studentToEdit = getStudentFromListByUsername(studentUsernameToEdit);
-                    int studentId = TerminalManager.askForInt("Enter id ow student you want to edit");
+                    int studentId = TerminalManager.askForInt("Enter id of student you want to edit");
                     User studentToEdit = getStudentFromListById(studentId);
                     MentorMenu.displaySecondEditingStudentMenu();
                     editStudent(studentToEdit);
                     break;
                 case 5:
-//                    gradeStudentAssignment();
+                    addAssignment();
                     break;
                 case 6:
-                    checkAttendence();
+                    gradeStudentAssignment();
                     break;
+                case 7:
+                    checkAttendence();
                 case 0:
                     isRunning = false;
                     break;
                 default:
                     System.out.println("Wrong input!");
-
 
             }
         }
@@ -80,7 +83,7 @@ public class MentorController implements Employee {
 
     }
 
-    public void addStudentToClass(Student studen) {
+    public void addStudentToClass(Student student) {
 
     }
 

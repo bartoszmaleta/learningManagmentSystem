@@ -1,18 +1,11 @@
 package com.company.controllers;
 
-import com.company.dao.MentorDAO;
-import com.company.dao.RegularEmployeeDAO;
-import com.company.dao.StudentDAO;
 import com.company.dao.UserDAOFromCSV;
 import com.company.models.users.User;
 import com.company.models.users.employees.Mentor;
-import com.company.models.users.employees.RegularEmployee;
-import com.company.models.users.students.Student;
 import com.company.service.TerminalManager;
 import com.company.view.View;
 import com.company.view.menu.ManagerMenu;
-
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Scanner;
 
