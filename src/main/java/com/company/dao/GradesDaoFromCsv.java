@@ -43,6 +43,24 @@ public class GradesDaoFromCsv implements GradesDao {
         return gradeList;
     }
 
+    public List<Grade> extractAllGrades() {
+        String id, assignmentTitle, studentUsername, mark;
+
+        List<Grade> gradeList = new ArrayList<>();
+
+        for (int i = 0; i < this.listOfRecords.size(); i++) {
+            List<String> grades = this.listOfRecords.get(i);
+            id = grades.get(idIndex);
+            assignmentTitle = grades.get(assignmentTitleIndex);
+            studentUsername = grades.get(studentUsernametIndex);
+            mark = String.valueOf(grades.get(markIndex));
+
+            gradeList.add(new Grade(Integer.parseInt(id), assignmentTitle, studentUsername, Integer.parseInt(mark)));
+        }
+        return gradeList;
+    }
+
+
     @Override
     public void write(Grade grade) {
         String[] toStringArrayGrade = toStringArray(grade);

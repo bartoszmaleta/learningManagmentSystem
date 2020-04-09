@@ -76,7 +76,6 @@ public class MentorController implements Employee {
 
             }
         }
-
     }
 
     private Assignment getAssignmentFromProvidedData() {
