@@ -66,8 +66,8 @@ public class LoginController {
             TerminalView.printString("          Wrong username or password.");
         } else {
             User user = new UserDaoFromCSV().readUserByUsernameAndPassword(username,password);
-            System.out.println("            userFound name = " + user.getName());
-            System.out.println("            userFound role = " + user.getRole());
+//            System.out.println("            userFound name = " + user.getName());
+//            System.out.println("            userFound role = " + user.getRole());
 
             if (user.getRole().equals("manager")) {
                 System.out.println("            Manager Role here");
