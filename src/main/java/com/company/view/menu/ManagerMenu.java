@@ -11,7 +11,7 @@ public class ManagerMenu {
         System.out.println("     (2) Remove mentor");
         System.out.println("     (3) Edit mentor");
         System.out.println("     (4) Display mentors");
-        System.out.println("     (5) WIP - ???");
+        System.out.println("     (5) Display students");
         System.out.println("     (6) WIP - ???");
         System.out.println("     (7) WIP - ???");
         System.out.println("     (8) WIP - ???");

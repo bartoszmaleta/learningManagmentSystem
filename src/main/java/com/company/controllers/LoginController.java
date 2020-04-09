@@ -38,7 +38,7 @@ public class LoginController {
         }
     }
 
-    public void loggingUser() throws FileNotFoundException {
+    public void loggingUser() {
         Scanner scanner = new Scanner(System.in);
 
         TerminalView.printString("User name: ");
