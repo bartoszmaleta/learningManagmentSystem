@@ -3,14 +3,14 @@ package com.company.models;
 public class Grade {
     private int id;
     private String assignmentTitle;
-    private int mark;
     private String studentUsername;
+    private int mark;
 
-    public Grade(int id, String assignmentTitle, int mark, String studentUsername) {
+    public Grade(int id, String assignmentTitle,  String studentUsername, int mark) {
         this.id = id;
         this.assignmentTitle = assignmentTitle;
-        this.mark = mark;
         this.studentUsername = studentUsername;
+        this.mark = mark;
     }
 
     public int getId() {

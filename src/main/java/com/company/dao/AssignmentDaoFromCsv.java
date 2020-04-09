@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentDaoFromCsv implements AssignmentDao {
-    int idIndex = 0;
-    int titleIndex = 1;
-    int usernameIndex = 2;
-    int mentorNameIndex = 3;
-    int isSubmittedIndex = 4;
+    private int idIndex = 0;
+    private int titleIndex = 1;
+    private int usernameIndex = 2;
+    private int mentorNameIndex = 3;
+    private int isSubmittedIndex = 4;
 
     private CsvParser csvParser;
     private List<List<String>> listOfRecords;
@@ -29,7 +29,9 @@ public class AssignmentDaoFromCsv implements AssignmentDao {
     public List<Assignment> extractAssignmentsFromListByStudentUsername(String studentUsernameForList) {
         String id, title, username, mentorName;
         boolean isSubmitted;
+
         List<Assignment> assignmentList = new ArrayList<>();
+
         for (int i = 0; i < this.listOfRecords.size(); i++) {
             List<String> assignments = this.listOfRecords.get(i);
             id = assignments.get(idIndex);

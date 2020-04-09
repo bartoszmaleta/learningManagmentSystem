@@ -1,6 +1,7 @@
 package com.company.controllers;
 
 import com.company.dao.AssignmentDaoFromCsv;
+import com.company.dao.GradesDaoFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
@@ -16,13 +17,13 @@ public class StudentController {
     private List<Assignment> assignments;
     private List<Grade> grades;
     AssignmentDaoFromCsv assignmentDAOFromCSV;
-    GradesDAOFromCsv gradesDAOFromCsv;
+    GradesDaoFromCsv gradesDaoFromCsv;
 
 
     public StudentController(User user) {
         System.out.println("Student Controller constructor here");
         assignments = assignmentDAOFromCSV.extractAssignmentsFromListByStudentUsername(user.getUsername());
-        grades = gradesDAOFromCsv.extractGradesListByUsername(user.getUsername());
+        grades = gradesDaoFromCsv.extractGradesFromListByStudentUsername(user.getUsername());
     }
 
     public void init() {
@@ -31,7 +32,7 @@ public class StudentController {
 
         while (isRunning) {
 //            TerminalView.clearScreen();
-            StudentMenu.displayMenu();
+//            StudentMenu.displayMenu();
 
             int choice = scanner.nextInt();
 
