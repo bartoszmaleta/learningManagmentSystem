@@ -1,6 +1,5 @@
 package com.company.controllers;
 
-import com.company.dao.AssignmentDao;
 import com.company.dao.AssignmentDaoFromCsv;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MentorController implements Employee {
+public class MentorController implements EmployeeController {
     private User user;
     UserDaoFromCSV userDaoFromCSV;
     private List<User> studentsList;
@@ -26,7 +25,7 @@ public class MentorController implements Employee {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
         studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
-//        assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
+        assignmentsList = new AssignmentDaoFromCsv().extractAllAssignments();
     }
 
 
@@ -36,6 +35,8 @@ public class MentorController implements Employee {
         while(isRunning) {
     //        TerminalView.clearScreen();
             MentorMenu.displayMenu();
+
+
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
             switch(choice) {

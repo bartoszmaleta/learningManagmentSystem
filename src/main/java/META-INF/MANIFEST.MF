@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: jansi-native-1.5-windows32.jar fliptables-1.1.0.jar hawtjni-
+ runtime-1.11.jar chalk-1.0.2.jar jansi-native-1.5-windows64.jar jansi-n
+ ative-1.5.jar
+

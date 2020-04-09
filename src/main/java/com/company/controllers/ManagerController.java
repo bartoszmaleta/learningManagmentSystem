@@ -10,7 +10,7 @@ import com.company.view.menu.ManagerMenu;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerController implements Employee {
+public class ManagerController implements EmployeeController {
     private User user;
     private List<User> mentorList;
     private List<User> studentsList;
@@ -73,9 +73,7 @@ public class ManagerController implements Employee {
 
 
     public void addMentor(User mentor) {
-        System.out.println("before size of mentorList = " + mentorList.size());
         this.mentorList.add(mentor);
-        System.out.println("after size of mentorList = " + mentorList.size());
         this.userDAOFromCSV.write(mentor);
     }
 
@@ -130,12 +128,14 @@ public class ManagerController implements Employee {
 
     public User getMentorFromListByUsername(String username) {
         for (User user : mentorList) {
-//            if (user.getRole().equals("mentor")) {
-            if (user.getUsername().equals(username)) {
-                return user;
+            if (user.getRole().equals("mentor")) {
+                if (user.getUsername().equals(username)) {
+                    return user;
+                }
             }
-//            }
         }
+        // TODO: no user handle!
+        TerminalManager.printString("No user found");
         return null;
     }
 

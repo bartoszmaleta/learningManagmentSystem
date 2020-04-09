@@ -87,10 +87,11 @@ public class CsvParser implements Parser {
             }
             newFileInString += "\n";
         }
+        String newFileInStringTrimmed = newFileInString.trim();
 
         try {
             FileWriter fw = new FileWriter(this.fileName, false);
-            fw.write(newFileInString + "\n");
+            fw.write(newFileInStringTrimmed);
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

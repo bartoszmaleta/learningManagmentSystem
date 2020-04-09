@@ -1,5 +1,5 @@
 package com.company.controllers;
 
-public interface Employee {
+public interface EmployeeController {
     public void displayStudents();
 }

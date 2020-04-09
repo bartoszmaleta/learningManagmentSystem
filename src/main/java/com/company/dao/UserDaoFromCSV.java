@@ -53,8 +53,6 @@ public class UserDaoFromCSV implements UserDao {
         for (int i = 0; i < listOfRecords.size(); i++) {
             if (listOfRecords.get(i).get(usernameIndex).equals(usernameGiven)
                     && listOfRecords.get(i).get(passwordIndex).equals(passwordGiven)) {
-                System.out.println("Found!");
-
                 this.user = new User(Integer.parseInt(listOfRecords.get(i).get(idIndex))
                         , listOfRecords.get(i).get(usernameIndex)
                         , listOfRecords.get(i).get(passwordIndex)
@@ -90,6 +88,7 @@ public class UserDaoFromCSV implements UserDao {
     @Override
     public void remove(User user) {
         List<List<String>> newList;
+
         for (int i = 0; i < this.listOfRecords.size(); i++) {
             if (this.listOfRecords.get(i).get(0).equals(String.valueOf(user.getId()))) {
                 this.listOfRecords.remove(this.listOfRecords.get(i));

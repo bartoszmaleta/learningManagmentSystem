@@ -2,7 +2,7 @@ package com.company.controllers;
 
 import com.company.models.users.User;
 
-public class RegularEmployeeController implements Employee {
+public class RegularEmployeeController implements EmployeeController {
     private User user;
 
     public RegularEmployeeController(User user) {
