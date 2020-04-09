@@ -1,6 +1,6 @@
 package com.company.controllers;
 
-import com.company.dao.UserDAOFromCSV;
+import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
 import com.company.models.users.User;
 import com.company.models.users.students.Student;
@@ -14,15 +14,15 @@ import java.util.List;
 
 public class MentorController implements Employee {
     private User user;
-    UserDAOFromCSV userDAOFromCSV;
+    UserDaoFromCSV userDaoFromCSV;
     private List<User> studentsList;
     private HashMap<String, ArrayList<User>> classes;
     private List <Assignment> assignmentsList;
 
     public MentorController(User user) {
         this.user = user;
-        userDAOFromCSV = new UserDAOFromCSV();
-        studentsList = new UserDAOFromCSV().extractUserFromListByRoleGiven("student");
+        userDaoFromCSV = new UserDaoFromCSV();
+        studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
 
     }
 
@@ -57,10 +57,10 @@ public class MentorController implements Employee {
                     editStudent(studentToEdit);
                     break;
                 case 5:
-                    addAssignment();
+//                    addAssignment();
                     break;
                 case 6:
-                    gradeStudentAssignment();
+//                    gradeStudentAssignment();
                     break;
                 case 7:
                     checkAttendence();
@@ -143,7 +143,7 @@ public class MentorController implements Employee {
                 student.setSurname(surname);
                 break;
         }
-        this.userDAOFromCSV.edit(student);
+        this.userDaoFromCSV.edit(student);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.company.controllers;
 
-import com.company.dao.UserDAOFromCSV;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.models.users.employees.Mentor;
