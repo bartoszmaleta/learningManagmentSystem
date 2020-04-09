@@ -23,7 +23,6 @@ public class MentorController implements Employee {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
         studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
-
     }
 
 
@@ -40,7 +39,7 @@ public class MentorController implements Employee {
                     displayStudents();
                     break;
                 case 2:
-                    displayStudents();
+//                    displayStudents();
 //                    addStudentToClass();
                     break;
                 case 3:
