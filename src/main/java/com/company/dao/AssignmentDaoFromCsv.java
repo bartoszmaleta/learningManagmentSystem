@@ -47,6 +47,25 @@ public class AssignmentDaoFromCsv implements AssignmentDao {
         return assignmentList;
     }
 
+    public List<Assignment> extractAllAssignments() {
+        String id, title, username, mentorName;
+        boolean isSubmitted;
+
+        List<Assignment> assignmentList = new ArrayList<>();
+
+        for (int i = 0; i < this.listOfRecords.size(); i++) {
+            List<String> assignments = this.listOfRecords.get(i);
+            id = assignments.get(idIndex);
+            title = assignments.get(titleIndex);
+            username = assignments.get(usernameIndex);
+            mentorName = assignments.get(mentorNameIndex);
+            isSubmitted = Boolean.parseBoolean(assignments.get(isSubmittedIndex));
+
+            assignmentList.add(new Assignment(Integer.parseInt(id), title, username, mentorName, isSubmitted));
+        }
+        return assignmentList;
+    }
+
     @Override
     public void write(Assignment assignment) {
         String[] toStringArrayAssignment = toStringArray(assignment);

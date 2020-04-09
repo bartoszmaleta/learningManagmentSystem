@@ -1,5 +1,7 @@
 package com.company.controllers;
 
+import com.company.dao.AssignmentDao;
+import com.company.dao.AssignmentDaoFromCsv;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
 import com.company.models.users.User;
@@ -18,12 +20,13 @@ public class MentorController implements Employee {
     private List<User> studentsList;
     private HashMap<String, ArrayList<User>> classes;
     private List <Assignment> assignmentsList;
+    private AssignmentDaoFromCsv assignmentDaoFromCsv;
 
     public MentorController(User user) {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
         studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
-
+        assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
     }
 
 
@@ -57,7 +60,8 @@ public class MentorController implements Employee {
                     editStudent(studentToEdit);
                     break;
                 case 5:
-//                    addAssignment();
+                    Assignment assignmentToAdd = getAssignmentFromProvidedData();
+                    addAssignment(assignmentToAdd);
                     break;
                 case 6:
 //                    gradeStudentAssignment();
@@ -75,8 +79,17 @@ public class MentorController implements Employee {
 
     }
 
-    public void addAssignment(Assignment assignment) {
+    private Assignment getAssignmentFromProvidedData() {
+        int id = this.assignmentDaoFromCsv.getLastIndex() - 1;
+        String title = TerminalManager.askForString("Enter title of assignment: ");
+        String studentUsername = TerminalManager.askForString("Enter student's username: ");
 
+        return new Assignment(id, title, studentUsername, this.user.getName(), false);
+    }
+
+    public void addAssignment(Assignment assignment) {
+        this.assignmentsList.add(assignment);
+        this.assignmentDaoFromCsv.write(assignment);
     }
 
     public void gradeStudentAssignment(Student student, String assignmentTitle) {
