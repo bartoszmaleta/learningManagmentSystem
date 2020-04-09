@@ -66,7 +66,7 @@ public class UserDaoFromCSV implements UserDao {
     }
 
     @Override
-    public List<User> extractUserFromListByRoleGiven(String roleForList) {
+    public List<User> extractUsersFromListOfRecordsByRoleGiven(String roleForList) {
         String id, login, password, name, surname, role;
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < this.listOfRecords.size(); i++) {
@@ -74,6 +74,7 @@ public class UserDaoFromCSV implements UserDao {
             id = users.get(0);
             login = users.get(1);
             password = "*************";
+//            password = users.get(2);
             name = users.get(3);
             surname = users.get(4);
             role = users.get(5);

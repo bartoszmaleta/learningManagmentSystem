@@ -76,7 +76,7 @@ public class StudentDao implements UserDao {
     }
 
     @Override
-    public List<User> extractUserFromListByRoleGiven(String roleForList) {
+    public List<User> extractUsersFromListOfRecordsByRoleGiven(String roleForList) {
         return null;
     }
 

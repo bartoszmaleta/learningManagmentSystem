@@ -1,2 +1,4 @@
 id,title,studentUsername,mentorName,isSubmitted,
-1,bartoszmal,bartoszmal,tom,true,
+1,hangman,bartoszmal,tom,true,
+2,onlineShop,bartoszmal,cvb,false,
+3,rogueLikeGame,bartoszmal,cvb,false,

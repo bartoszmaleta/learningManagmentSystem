@@ -24,8 +24,10 @@ public class MentorController implements EmployeeController {
     public MentorController(User user) {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
-        studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
-        assignmentsList = new AssignmentDaoFromCsv().extractAllAssignments();
+        studentsList = userDaoFromCSV.extractUsersFromListOfRecordsByRoleGiven("student");
+        assignmentDaoFromCsv = new AssignmentDaoFromCsv();
+        assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
+        System.out.println(assignmentsList);
     }
 
 
@@ -35,8 +37,6 @@ public class MentorController implements EmployeeController {
         while(isRunning) {
     //        TerminalView.clearScreen();
             MentorMenu.displayMenu();
-
-
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
             switch(choice) {
@@ -61,6 +61,7 @@ public class MentorController implements EmployeeController {
                     editStudent(studentToEdit);
                     break;
                 case 5:
+                    displayAllAssignments();
                     Assignment assignmentToAdd = getAssignmentFromProvidedData();
                     addAssignment(assignmentToAdd);
                     break;
@@ -86,9 +87,16 @@ public class MentorController implements EmployeeController {
     }
 
     private Assignment getAssignmentFromProvidedData() {
-        int id = this.assignmentDaoFromCsv.getLastIndex() - 1;
+        System.out.println("1");
+//        int id = this.assignmentDaoFromCsv.getLastIndex() + 1;
+        int id = this.assignmentsList.get(this.assignmentsList.size() - 1).getId() + 1;
+        System.out.println("2");
+
         String title = TerminalManager.askForString("Enter title of assignment: ");
+        System.out.println("1");
+
         String studentUsername = TerminalManager.askForString("Enter student's username: ");
+        System.out.println("1");
 
         return new Assignment(id, title, studentUsername, this.user.getName(), false);
     }
@@ -168,5 +176,9 @@ public class MentorController implements EmployeeController {
     @Override
     public void displayStudents() {
         View.viewAllStudents(studentsList);
+    }
+
+    public void displayAllAssignments() {
+        View.viewAllAssignments(assignmentsList);
     }
 }
