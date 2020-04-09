@@ -1,2 +1,2 @@
-id,assignmentTitle,studentId,mark,
-1,hangman,1,3,
+id,assignmentTitle,studentUsername,mark,
+1,hangman,bartoszmal,3,
