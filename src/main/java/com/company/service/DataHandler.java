@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class DataHandler {
 
-    public static void printFromFile(String filepath) throws FileNotFoundException {
-        TerminalManager.clearScreen();
+    public static void  printFromFile(String filepath) throws FileNotFoundException {
+//        TerminalManager.clearScreen();
 
         Scanner input = new Scanner(new File(filepath));
 

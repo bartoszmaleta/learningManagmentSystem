@@ -26,7 +26,7 @@ public class MentorController implements Employee {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
         studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
-        assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
+//        assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
     }
 
 

@@ -61,6 +61,7 @@ public class ManagerController implements Employee {
                     break;
                 case 5:
                     displayStudents();
+                    break;
                 case 0:
                     isRunning = false;
                     break;

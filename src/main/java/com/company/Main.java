@@ -9,10 +9,11 @@ import com.company.view.View;
 
 import java.io.FileNotFoundException;
 
-public class App2 {
-    public static void main(String[] args) throws Exception {
-//        LoginController logging = new LoginController();
-//        logging.init();
+
+public class Main {
+    public static void main(String[] args) throws FileNotFoundException {
+        LoginController logging = new LoginController();
+        logging.init();
 
 //        UserDAOFromCSV userDAOFromCSV = new UserDAOFromCSV();
 //        List<User> students = userDAOFromCSV.extractUserFromListByRoleGiven("student");

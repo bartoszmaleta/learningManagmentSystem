@@ -13,7 +13,7 @@ public class TerminalView {
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.next();
         while(!answer.matches("[0-9]+")) {
-            System.out.println("Wrong input! Choose only numbers!");
+            System.out.println("            Wrong input! Choose only numbers!");
             answer = scanner.next();
         }
         return Integer.valueOf(answer);
