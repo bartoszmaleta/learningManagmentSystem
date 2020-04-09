@@ -5,13 +5,22 @@ import com.company.dao.GradesDaoFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
+import com.company.service.DataHandler;
 import com.company.service.TerminalManager;
 import com.company.view.View;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
 public class StudentController {
+
+    Path path = Paths.get("");
+    Path absolutePath = path.toAbsolutePath();
+    String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
+
     Scanner scanner = new Scanner(System.in);
     private User user;
     private List<Assignment> assignments;
@@ -22,26 +31,29 @@ public class StudentController {
 
     public StudentController(User user) {
         System.out.println("Student Controller constructor here");
+        assignmentDAOFromCSV = new AssignmentDaoFromCsv();
         assignments = assignmentDAOFromCSV.extractAssignmentsFromListByStudentUsername(user.getUsername());
+        gradesDaoFromCsv = new GradesDaoFromCsv();
         grades = gradesDaoFromCsv.extractGradesFromListByStudentUsername(user.getUsername());
     }
 
-    public void init() {
+    public void init() throws FileNotFoundException {
         boolean isRunning = true;
-//        TerminalView.displayWelcomeScreen();
 
         while (isRunning) {
 //            TerminalView.clearScreen();
 //            StudentMenu.displayMenu();
 
+            DataHandler.printFromFile(location + "StudentMenu");
+
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    View.viewAllGrades(grades);
+                    displayGrades();
                     break;
                 case 2:
-                    View.viewAllAssignments(assignments);
+                    displayAssignments();
                     int indexOfAssignmentToSubmit = TerminalManager.askForInt("Which assignment You want to submit?");
                     Assignment assignmentToSubmit = getAssignmentFromListById(indexOfAssignmentToSubmit);
                     submitAssignment(assignmentToSubmit);
@@ -59,13 +71,8 @@ public class StudentController {
         }
     }
 
-    private void submitAssignment(Grade gradeToEdit) {
-
-
-    }
-
     public Grade getGradeFromListById(int idOfGrade) {
-        for(Grade grade : grades) {
+        for (Grade grade : grades) {
             if (grade.getId() == idOfGrade) {
                 return grade;
             }
@@ -74,7 +81,7 @@ public class StudentController {
     }
 
     public Assignment getAssignmentFromListById(int idOfAssignment) {
-        for(Assignment assignment : assignments) {
+        for (Assignment assignment : assignments) {
             if (assignment.getId() == idOfAssignment) {
                 return assignment;
             }
@@ -82,9 +89,13 @@ public class StudentController {
         return null;
     }
 
+    public void displayAssignments() {
+        View.viewAllAssignments(assignments);
+    }
+
 
     public void displayGrades() {
-
+        View.viewAllGrades(grades);
     }
 
     public void submitAssignment(Assignment assignment) {

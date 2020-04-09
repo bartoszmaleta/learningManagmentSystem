@@ -20,7 +20,6 @@ public class LoginController {
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
 
-
         while (isRunning) {
 //            TerminalView.clearScreen();
             DataHandler.printFromFile(location + "MainScreen");

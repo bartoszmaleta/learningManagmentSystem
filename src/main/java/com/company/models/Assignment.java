@@ -5,11 +5,11 @@ public class Assignment {
     private int id;
     private String title;
     private String studentUsername;
-    private int grade;
-    private boolean isSubmitted = false;
+    //    private int grade;
     private String mentorName;
+    private boolean isSubmitted = false;
 
-    public Assignment(int id, String title, String studentUsername, String mentorName,  boolean isSubmitted) {
+    public Assignment(int id, String title, String studentUsername, String mentorName, boolean isSubmitted) {
         this.id = id;
         this.title = title;
         this.studentUsername = studentUsername;
@@ -62,13 +62,13 @@ public class Assignment {
         this.title = title;
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
+//    public int getGrade() {
+//        return grade;
+//    }
+//
+//    public void setGrade(int grade) {
+//        this.grade = grade;
+//    }
 
     public void setIsSubmittedTrue() {
         isSubmitted = true;
