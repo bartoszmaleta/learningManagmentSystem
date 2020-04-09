@@ -176,6 +176,7 @@ public class MentorController implements EmployeeController {
 
     public void checkAttendence() {
 
+
     }
 
     public User getStudentFromListByUsername(String username) {
