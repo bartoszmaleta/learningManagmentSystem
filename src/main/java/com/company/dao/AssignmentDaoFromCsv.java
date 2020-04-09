@@ -7,7 +7,7 @@ import com.company.models.users.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignmentDAOFromCsv implements AssignmentDao {
+public class AssignmentDaoFromCsv implements AssignmentDao {
     int idIndex = 0;
     int titleIndex = 1;
     int usernameIndex = 2;
@@ -19,7 +19,7 @@ public class AssignmentDAOFromCsv implements AssignmentDao {
     private Assignment assignment;
     private String filepathOfAssignmentsCsv = "src/main/resources/assignments.csv";
 
-    public AssignmentDAOFromCsv() {
+    public AssignmentDaoFromCsv() {
         this.csvParser = new CsvParser(filepathOfAssignmentsCsv);
         this.listOfRecords = csvParser.getUpdatedList();
     }

@@ -1,12 +1,11 @@
 package com.company.controllers;
 
-import com.company.dao.AssignmentDAOFromCsv;
+import com.company.dao.AssignmentDaoFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
 import com.company.service.TerminalManager;
 import com.company.view.View;
-import com.company.view.menu.ManagerMenu;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ public class StudentController {
     private User user;
     private List<Assignment> assignments;
     private List<Grade> grades;
-    AssignmentDAOFromCsv assignmentDAOFromCSV;
+    AssignmentDaoFromCsv assignmentDAOFromCSV;
     GradesDAOFromCsv gradesDAOFromCsv;
 
 
