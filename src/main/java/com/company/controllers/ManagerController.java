@@ -16,7 +16,7 @@ import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerController implements Employee{
+public class ManagerController implements Employee {
     private User user;
     private List<User> mentorList;
     private List<User> studentsList;
@@ -89,7 +89,7 @@ public class ManagerController implements Employee{
 
     public void editMentor(User mentor) {
         int option = TerminalManager.takeIntInputWithoutMessage();
-        switch(option) {
+        switch (option) {
             case 1:
                 String newUsername = TerminalManager.askForString("Enter mentor's new username: ");
                 mentor.setUsername(newUsername);
@@ -109,7 +109,7 @@ public class ManagerController implements Employee{
             case 5:
                 String username = TerminalManager.askForString("Enter mentor's new username: ");
                 mentor.setUsername(username);
-                String password= TerminalManager.askForString("Enter mentor's new password: ");
+                String password = TerminalManager.askForString("Enter mentor's new password: ");
                 mentor.setPassword(password);
                 String name = TerminalManager.askForString("Enter mentor's new name: ");
                 mentor.setName(name);
@@ -119,6 +119,7 @@ public class ManagerController implements Employee{
         }
         this.userDAOFromCSV.edit(mentor);
     }
+
     public User getMentorFromProvidedData() {
 //        int id = TerminalManager.askForInt("Enter mentor's id: ");
         int id = this.userDAOFromCSV.getLastIndex() + 1;
@@ -131,12 +132,12 @@ public class ManagerController implements Employee{
     }
 
     public User getMentorFromListByUsername(String username) {
-        for(User user : mentorList) {
-            if (user.getRole().equals("mentor")) {
-                if(user.getUsername().equals(username)) {
-                    return user;
-                }
+        for (User user : mentorList) {
+//            if (user.getRole().equals("mentor")) {
+            if (user.getUsername().equals(username)) {
+                return user;
             }
+//            }
         }
         return null;
     }

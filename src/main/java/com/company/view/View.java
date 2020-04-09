@@ -1,5 +1,7 @@
 package com.company.view;
 
+import com.company.models.Assignment;
+import com.company.models.Grade;
 import com.company.models.users.User;
 import com.company.models.users.employees.Mentor;
 import com.company.models.users.employees.RegularEmployee;
@@ -26,7 +28,13 @@ public class View {
 //        System.out.println(FlipTableConverters.fromIterable(regularEmployees, User.class));
     }
 
-    public static void viewGrades(Student student) {
+    public static void viewAllGrades(List<Grade> grades) {
+        // TODO is it okay Staszek?
+        System.out.println(FlipTableConverters.fromIterable(grades, Grade.class));
+    }
 
+    public static void viewAllAssignments(List<Assignment> assignments) {
+        // TODO is it okay Staszek?
+        System.out.println(FlipTableConverters.fromIterable(assignments, Assignment.class));
     }
 }
