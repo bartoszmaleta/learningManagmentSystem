@@ -13,39 +13,49 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendenceDaoFromCsv {
-    private int idIndex = 0;
-    private int localDateIndex = 1;
-    private int studentUsernameIndex = 2;
-    private int isPresentIndex = 3;
+public class AttendenceDaoFromCsv implements AttendenceDao{
+    private final int idIndex = 0;
+    private final int localDateIndex = 1;
+    private final int studentUsernameIndex = 2;
+    private final int isPresentIndex = 3;
 
-    private CsvParser csvParser;
+    private final CsvParser csvParser;
     private List<List<String>> listOfRecords;
     private Attendence attendence;
-    private String filepathOfCsv = "src/main/resources/attendence.csv";
+    private final String pathFromContentRoot = "src/main/resources/attendance.csv";
 
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
-    String location = absolutePath.toString() + "/src/main/resources/attendences/";
-
-    String locationWithDate = location + "attendence" + LocalDate.now();
-
+    String location = absolutePath.toString() + pathFromContentRoot;
+    String locationWithDate = location + "attendance" + LocalDate.now();
 
     public AttendenceDaoFromCsv() throws FileNotFoundException {
         this.csvParser = new CsvParser(locationWithDate);
-//        this.listOfRecords = csvParser.getUpdatedList();
     }
 
+    @Override
     public void write(Attendence attendence) {
         String[] toStringArrayAssignment = attendence.toStringArray();
         this.csvParser.addNewRecord(toStringArrayAssignment);
     }
 
+    @Override
+    public String[] toStringArray(Attendence attendence) {
+        return new String[0];
+    }
+
+    @Override
+    public int getLastIndex() {
+        return 0;
+    }
+
+    @Override
     public void writeFirstRecord(Attendence attendence, String[] headers) {
         String[] toStringArrayAssignment = attendence.toStringArray();
         this.csvParser.addFirstRecord(toStringArrayAssignment, headers);
     }
 
+    @Override
     public List<Attendence> extractAllAttendences() {
         String id, username, isPresent;
         LocalDate localDate;
