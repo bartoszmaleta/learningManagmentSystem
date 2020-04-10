@@ -110,16 +110,13 @@ public class MentorController implements EmployeeController, Controller {
 
                     // TODO: to check!
                     displayMyStudents();
-                    int studentIdToGrade = TerminalManager.askForInt("Enter id of student You want to grade");
-                    User studentToGrade = getStudentFromListById(studentIdToGrade);
+//                    int studentIdToGrade = TerminalManager.askForInt("Enter id of student You want to grade");
+                    String studentUsernameToGrade = TerminalManager.
+                            askForString("Enter student username You want to grade");
+                    User studentToGrade = getStudentFromListByUsername(studentUsernameToGrade);
                     String assignmentTitleToGrade = TerminalManager.askForString("Enter title of assignment to grade");
 
-                    System.out.println("213");
-                    System.out.println(studentToGrade.getName());
-                    System.out.println("213");
-
                     Grade gradeToAdd = getGradeFromProvidedData(studentToGrade, assignmentTitleToGrade);
-
                     addGradeToGrades(gradeToAdd);
                     break;
                 case 7:
@@ -157,15 +154,13 @@ public class MentorController implements EmployeeController, Controller {
 
     private Grade getGradeFromProvidedData(User studentToGrade, String assignmentTitleToGrade) {
         int id = this.gradesList.get(this.gradesList.size() - 1).getId() + 1;
-        System.out.println("21sd3");
 
         String assignmentTitle = assignmentTitleToGrade;
-        System.out.println("213");
         String studentUsername = studentToGrade.getUsername();
-        System.out.println("21ww3");
-
         int markForAssignment = TerminalManager.askForInt("Enter mark You want to grade "
-                + Chalk.on(studentUsername).green() + " for assignment " + Chalk.on(assignmentTitle).green());
+                + Chalk.on(studentUsername).green()
+                + " for assignment "
+                + Chalk.on(assignmentTitle).green());
 
         Grade grade = new Grade(id, assignmentTitle, studentUsername, markForAssignment);
         return grade;
@@ -270,7 +265,7 @@ public class MentorController implements EmployeeController, Controller {
         for (int i = 0; i < this.studentsList.size(); i++) {
             String isPresentStudent = TerminalManager.
                     askForString("Is student with name "
-                            + this.studentsList.get(i).getName() + " present today?");
+                            + Chalk.on(this.studentsList.get(i).getName()).green() + " present today?");
             Attendence attendence = new Attendence(i + 1
                     , LocalDate.now()
                     , this.studentsList.get(i).getUsername()

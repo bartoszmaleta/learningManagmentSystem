@@ -1,5 +1,5 @@
 id,username,password,name,surname,role,
-1,bartoszmal,password1,bartosz2,maleta,student,
+1,bartoszmal,password1,Bartosz,maleta,student,
 2,johny,password2,john,smith,manager,
 3,stevo,password3,steve,williams,regularEmployee,
 4,tomson,password4,Thomas,tomsonik,student,
