@@ -11,7 +11,7 @@ import com.company.service.FileReader;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
-import com.company.view.menu.MentorMenu;
+import com.company.view.menuNotUsed.MentorMenu;
 import com.github.tomaslanger.chalk.Chalk;
 
 import java.io.FileNotFoundException;
@@ -62,6 +62,7 @@ public class MentorController implements EmployeeController, Controller {
             FileReader.printFromFile(location + "MentorMenu");
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
+
             switch (choice) {
                 case 1:
                     TerminalView.clearScreen();

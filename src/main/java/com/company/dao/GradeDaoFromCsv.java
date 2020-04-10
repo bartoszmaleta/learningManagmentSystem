@@ -12,8 +12,8 @@ public class GradeDaoFromCsv implements GradeDao {
     private final int studentUsernametIndex = 2;
     private final int markIndex = 3;
 
-    private CsvParser csvParser;
-    private List<List<String>> listOfRecords;
+    private final CsvParser csvParser;
+    private final List<List<String>> listOfRecords;
     private Grade grade;
     private String filepathOfGradesCsv = "src/main/resources/grades.csv";
 

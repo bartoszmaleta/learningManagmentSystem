@@ -18,7 +18,7 @@ public class AttendanceDaoFromCsv implements AttendanceDao {
 
     private final CsvParser csvParser;
     private List<List<String>> listOfRecords;
-    private final String pathFromContentRoot = "src/main/resources/attendance.csv";
+    private final String pathFromContentRoot = "/src/main/resources/attendances/";
 
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();

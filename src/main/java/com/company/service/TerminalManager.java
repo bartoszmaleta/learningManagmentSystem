@@ -34,7 +34,7 @@ public class TerminalManager {
         Scanner scanner = new Scanner(System.in);
         String output = scanner.next();
         while (!output.matches("[0-9]+")) {
-            printString("Use only numbers");
+            System.out.println("            Wrong input! Choose only numbers!");
             output = scanner.next();
         }
         return Integer.parseInt(output);
@@ -45,7 +45,7 @@ public class TerminalManager {
         Scanner scanner = new Scanner(System.in);
         String out = scanner.next();
         while (!out.matches("[0-9]+")) {
-            printString("Use only numbers");
+            System.out.println("            Wrong input! Choose only numbers!");
             out = scanner.next();
         }
         return Integer.valueOf(out);
@@ -97,6 +97,4 @@ public class TerminalManager {
 
         return false;
     }
-
-
 }

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentDaoFromCsv implements AssignmentDao {
-    private int idIndex = 0;
-    private int titleIndex = 1;
-    private int usernameIndex = 2;
-    private int mentorNameIndex = 3;
-    private int isSubmittedIndex = 4;
+    private final int idIndex = 0;
+    private final int titleIndex = 1;
+    private final int usernameIndex = 2;
+    private final int mentorNameIndex = 3;
+    private final int isSubmittedIndex = 4;
 
-    private CsvParser csvParser;
-    private List<List<String>> listOfRecords;
+    private final CsvParser csvParser;
+    private final List<List<String>> listOfRecords;
     private Assignment assignment;
     private String filepathOfAssignmentsCsv = "src/main/resources/assignments.csv";
 

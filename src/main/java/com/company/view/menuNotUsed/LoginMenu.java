@@ -1,4 +1,4 @@
-package com.company.view.menu;
+package com.company.view.menuNotUsed;
 
 public class LoginMenu {
 

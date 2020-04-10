@@ -3,6 +3,7 @@ package com.company.controllers;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.service.FileReader;
+import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
 
@@ -21,8 +22,6 @@ public class RegularEmployeeController implements EmployeeController, Controller
     private List<User> studentsList;
     private UserDaoFromCSV userDaoFromCSV;
 
-    private Scanner scanner = new Scanner(System.in);
-
     public RegularEmployeeController(User user) {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
@@ -38,7 +37,7 @@ public class RegularEmployeeController implements EmployeeController, Controller
 
             FileReader.printFromFile(location + "EmployeeMenu");
 
-            int choice = scanner.nextInt();
+            int choice = TerminalManager.takeIntInputWithoutMessage();
 
             switch (choice) {
                 case 1:

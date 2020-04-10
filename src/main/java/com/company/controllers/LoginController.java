@@ -76,10 +76,14 @@ public class LoginController implements Controller {
                 handleMentor(user);
                 break;
             case "regularEmployee":
-                RegularEmployeeController regularEmployeeController = new RegularEmployeeController(user);
-                regularEmployeeController.init();
+                handleRegularEmployee(user);
                 break;
         }
+    }
+
+    private void handleRegularEmployee(User user) throws FileNotFoundException {
+        RegularEmployeeController regularEmployeeController = new RegularEmployeeController(user);
+        regularEmployeeController.init();
     }
 
     private void handleMentor(User user) throws FileNotFoundException {

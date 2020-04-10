@@ -12,8 +12,8 @@ public class ClassDaoFromCsv implements ClassDao {
     int studentUsernameIndex = 2;
     int mentorNameIndex = 3;
 
-    private CsvParser csvParser;
-    private List<List<String>> listOfRecords;
+    private final CsvParser csvParser;
+    private final List<List<String>> listOfRecords;
     private Class classes;
     private String filepathOfClassesCsv = "src/main/resources/classes.csv";
 

@@ -15,7 +15,7 @@ public class UserDaoFromCSV implements UserDao {
     int surnameIndex = 4;
     int roleIndex = 5;
 
-    private CsvParser csvParser;
+    private final CsvParser csvParser;
     private List<List<String>> listOfRecords;
     private User user;
     private String filepathOfUsersCsv = "src/main/resources/users.csv";

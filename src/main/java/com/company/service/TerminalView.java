@@ -12,21 +12,12 @@ public class TerminalView {
         System.out.println(question);
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.next();
-        while(!answer.matches("[0-9]+")) {
+        while (!answer.matches("[0-9]+")) {
             System.out.println("            Wrong input! Choose only numbers!");
             answer = scanner.next();
         }
         return Integer.valueOf(answer);
 
-    }
-
-    private static String multiSign(int multiplication, String sign) {
-        String out = "";
-
-        for (int i = 0; i < multiplication; i++) {
-            out += sign;
-        }
-        return out;
     }
 
     public static String repeatString(String c, int times) {
@@ -58,11 +49,9 @@ public class TerminalView {
         while (isRunningMenu) {
             switch (choice.toLowerCase()) {
                 case "m":
-                    menuHandler();
                     isRunningMenu = false;
                     break;
                 default:
-                    isRunningMenu = false;
                     break;
             }
         }
@@ -72,25 +61,6 @@ public class TerminalView {
         System.out.println("|     Press (m) for MENU    |");
         System.out.println("-----------------------------");
         scanner.nextLine();
-
-    }
-
-    private static void menuHandler() throws FileNotFoundException {
-        boolean isMenuRunning = true;
-        while (isMenuRunning) {
-            displayMenu();
-            switch (scanner.nextLine()) {
-                case "1":
-                    isMenuRunning = false;
-                    break;
-                case "0":
-                    System.exit(0);
-                    break;
-
-                default:
-                    System.out.println("Wrong input");
-            }
-        }
     }
 
     public static void displayMenu() throws FileNotFoundException {
@@ -109,39 +79,16 @@ public class TerminalView {
         System.out.println("\n\n\n(1) - Back to the game\n(0) - Exit the program\n\n\n");
     }
 
-
     public static void displayWelcomeScreen() {
-        emptyLinesThree();
-        System.out.println("\n\n\n\n\n\n");
+        TerminalManager.multiSign(9, "\n");
         System.out.println("Produced by: ");
         System.out.println("Aleksandra Kasaraba");
         System.out.println("Bartosz Maleta");
         System.out.println("Stanisław Chynek");
-        System.out.println("Przemysław Buszek\n\n\n");
+        System.out.println("Przemysław Buszek");
+        TerminalManager.multiSign(3, "\n");
+
         pressAnyKeyToContinue();
-    }
-
-    public static void clearScreen() {
-//        multiSign(30, "\n");
-
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println("----------------------- Clear Screen -----------------------");
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    public static void emptyLinesThree() {
-        System.out.println("\n\n");
-    }
-
-    public static void thirtyLines() {
-        for (int i = 0; i < 30; i++) {
-            System.out.println();
-        }
     }
 
     public static void showMenu() {
@@ -155,8 +102,8 @@ public class TerminalView {
         System.out.println("5. ");
         System.out.println("6. ");
         System.out.println("7. Exit program");
-
     }
+
     public static void blankLines(int numberOfBlankLines) {
         StringBuffer result = new StringBuffer();
 
@@ -168,18 +115,13 @@ public class TerminalView {
         // return result;
 
     }
-//
-//    public static void clearScreen() {
-//        System.out.print("\033[H\033[2J");
-//        System.out.flush();
 
-//    }
-
-
+        public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     public static void printString(String message) {
         System.out.println(message);
     }
-
-
 }

@@ -8,14 +8,12 @@ import com.company.service.FileReader;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
-import com.company.view.menu.ManagerMenu;
+import com.company.view.menuNotUsed.ManagerMenu;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
 
 public class ManagerController implements EmployeeController, Controller {
 
@@ -24,11 +22,10 @@ public class ManagerController implements EmployeeController, Controller {
     private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
 
     private User user;
-    private List<User> mentorList;
-    private List<User> studentsList;
-    private List<User> regularEmployeesList;
-    Scanner scanner = new Scanner(System.in); // TODO HELP MEEE!!!
-    UserDao userDAOFromCSV;
+    private final List<User> mentorList;
+    private final List<User> studentsList;
+    private final List<User> regularEmployeesList;
+    private final UserDao userDAOFromCSV;
 
     public ManagerController(User user) {
         userDAOFromCSV = new UserDaoFromCSV();
@@ -46,8 +43,9 @@ public class ManagerController implements EmployeeController, Controller {
         while (isRunning) {
             FileReader.printFromFile(location + "ManagerMenu");
 
-            int choice = scanner.nextInt(); // InputProvider.askForInt(String message, String onErrorMessage, int
-            // start, int end, int limit, String exit)
+            int choice = TerminalManager.takeIntInputWithoutMessage();
+            // TODO: InputProvider.askForInt(String message, String onErrorMessage, int
+            // TODO: start, int end, int limit, String exit)
 
             switch (choice) {
                 case 1:
