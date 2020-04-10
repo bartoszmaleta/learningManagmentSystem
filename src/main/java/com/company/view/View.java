@@ -1,13 +1,12 @@
 package com.company.view;
 
-import com.company.dao.Parser.CsvParser;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
 import com.company.models.Class;
 import com.company.models.Grade;
 import com.company.models.users.User;
 import com.company.models.users.notUsedModels.employees.RegularEmployee;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.jakewharton.fliptables.FlipTableConverters;
 
 import java.io.FileNotFoundException;
@@ -40,7 +39,7 @@ public class View {
 
         //        -----------------------------------------------------------------------
         // THIS WORKS BELOW WITH HASH
-        DataHandler.printFromFile(location + "StudentsList");
+        FileReader.printFromFile(location + "StudentsList");
         List<User> newList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("student");
         String[] headers = {"id", "username", "password", "name", "surname", "role"};
         Object[][] data = new Object[newList.size()][headers.length];
@@ -50,7 +49,7 @@ public class View {
             data[i][0] = user.getId();
             data[i][1] = user.getUsername();
 //            data[i][2] = user.getPassword();
-            data[i][2] = "************";
+            data[i][2] = "*".repeat(user.getPassword().length());
             data[i][3] = user.getName();
             data[i][4] = user.getSurname();
             data[i][5] = user.getRole();
@@ -63,7 +62,7 @@ public class View {
     }
 
     public static void viewAllMentors(List<User> mentors) throws FileNotFoundException {
-        DataHandler.printFromFile(location + "MentorsList");
+        FileReader.printFromFile(location + "MentorsList");
         System.out.println(FlipTableConverters.fromIterable(mentors, User.class));
     }
 
@@ -72,17 +71,17 @@ public class View {
     }
 
     public static void viewAllGrades(List<Grade> grades) throws FileNotFoundException {
-        DataHandler.printFromFile(location + "Grades");
+        FileReader.printFromFile(location + "Grades");
         System.out.println(FlipTableConverters.fromIterable(grades, Grade.class));
     }
 
     public static void viewAllAssignments(List<Assignment> assignments) throws FileNotFoundException {
-        DataHandler.printFromFile(location + "Assignments");
+        FileReader.printFromFile(location + "Assignments");
         System.out.println(FlipTableConverters.fromIterable(assignments, Assignment.class));
     }
 
     public static void viewAllClasses(List<Class> classesList) throws FileNotFoundException {
-        DataHandler.printFromFile(location + "MentorClassList");
+        FileReader.printFromFile(location + "MentorClassList");
         System.out.println(FlipTableConverters.fromIterable(classesList, Class.class));
     }
 

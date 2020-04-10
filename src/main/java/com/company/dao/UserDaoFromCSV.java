@@ -63,23 +63,28 @@ public class UserDaoFromCSV implements UserDao {
 
     @Override
     public List<User> extractUsersFromListOfRecordsByRoleGiven(String roleForList) {
-        String id, login, password, name, surname, role;
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < this.listOfRecords.size(); i++) {
             List<String> users = this.listOfRecords.get(i);
-            id = users.get(0);
-            login = users.get(1);
-//            password = "*************";
-            password = users.get(2);
-            name = users.get(3);
-            surname = users.get(4);
-            role = users.get(5);
+            String role = users.get(5);
+
+//            CsvLine userData = this.listOfRecords.get(i);
+//            String role = userData.getByIndex(roleIndex); // TODO add abstraction layer on top of List<List<String>>;
 
             if (roleForList.equals(role)) {
-                userList.add(new User(Integer.parseInt(id), login, password, name, surname, role));
+                appendNewUser(role, userList, users);
             }
         }
         return userList;
+    }
+
+    private void appendNewUser(String role, List<User> userList, List<String> users) {
+        String id = users.get(0);
+        String login = users.get(1);
+        String password = users.get(2);
+        String name = users.get(3);
+        String surname = users.get(4);
+        userList.add(new User(Integer.parseInt(id), login, password, name, surname, role));
     }
 
     @Override

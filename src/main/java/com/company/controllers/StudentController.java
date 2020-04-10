@@ -5,7 +5,7 @@ import com.company.dao.GradeDaoFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
@@ -45,7 +45,7 @@ public class StudentController implements Controller {
         TerminalView.clearScreen();
 
         while (isRunning) {
-            DataHandler.printFromFile(location + "StudentMenu");
+            FileReader.printFromFile(location + "StudentMenu");
 
             int choice = scanner.nextInt();
 
