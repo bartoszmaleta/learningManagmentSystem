@@ -1,10 +1,8 @@
 package com.company.controllers;
 
 import com.company.dao.UserDaoFromCSV;
-import com.company.models.Assignment;
 import com.company.models.users.User;
 import com.company.service.DataHandler;
-import com.company.service.TerminalManager;
 import com.company.view.View;
 
 import java.io.FileNotFoundException;
@@ -27,7 +25,7 @@ public class RegularEmployeeController implements EmployeeController {
     public RegularEmployeeController(User user) {
         this.user = user;
         userDaoFromCSV = new UserDaoFromCSV();
-        studentsList = userDaoFromCSV.extractUserFromListByRoleGiven("student");
+        studentsList = userDaoFromCSV.extractUsersFromListOfRecordsByRoleGiven("student");
     }
 
     public void init() throws FileNotFoundException {

@@ -77,6 +77,17 @@ public class CsvParser implements Parser {
         }
     }
 
+    public void addFirstRecord(String[] newRecord, String[] headers) {
+        try {
+            FileWriter fw = new FileWriter(this.fileName, true);
+            fw.append(String.join(",", headers) + "," + "\n");
+            fw.append(String.join(",", newRecord) + ",");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void updateFile(List<List<String>> newList, String header) {
         String newFileInString = header + "\n";

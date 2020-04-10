@@ -22,15 +22,14 @@ public class ManagerController implements EmployeeController {
         System.out.println("Manager Controller constructor here");
         userDAOFromCSV = new UserDaoFromCSV();
         this.user = user;
-        mentorList = new UserDaoFromCSV().extractUserFromListByRoleGiven("mentor");
-        studentsList = new UserDaoFromCSV().extractUserFromListByRoleGiven("student");
-        regularEmployeesList = new UserDaoFromCSV().extractUserFromListByRoleGiven("regularEmployee");
+        mentorList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("mentor");
+        studentsList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("student");
+        regularEmployeesList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("regularEmployee");
     }
 
 
     public void init() {
         boolean isRunning = true;
-//        TerminalView.displayWelcomeScreen();
 
         while (isRunning) {
 //            TerminalView.clearScreen();
@@ -140,7 +139,7 @@ public class ManagerController implements EmployeeController {
     }
 
     public void displayMentors() {
-        View.viewAllMentors(new UserDaoFromCSV().extractUserFromListByRoleGiven("mentor"));
+        View.viewAllMentors(new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("mentor"));
     }
 
     public void getMentorFromList(Mentor mentor) {

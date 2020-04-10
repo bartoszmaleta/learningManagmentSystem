@@ -4,18 +4,20 @@ import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.service.DataHandler;
 import com.company.service.TerminalView;
-import com.company.view.menu.LoginMenu;
+import com.company.service.passwordHasher.PasswordField;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+// WHY??? generics?
 public class LoginController {
     Scanner scanner = new Scanner(System.in);
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
     String location = absolutePath.toString()+"/src/main/resources/Menu CcMS/Small/";
+
 
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
@@ -58,9 +60,13 @@ public class LoginController {
         TerminalView.printString("          User name: ");
         String username = scanner.nextLine();
 
-        TerminalView.printString("          User password: ");
-        String password = scanner.nextLine();
+        // OPTION 1 - Ask password with hash!
+        String password = PasswordField.readPassword("          Enter password: ");
+        System.out.println("          Password entered was:" + password);
 
+        // OPTION 2 -  Ask password without hash!
+//        TerminalView.printString("          User password: ");
+//        String password = scanner.nextLine();
 
         if (new UserDaoFromCSV().readUserByUsernameAndPassword(username,password).getName()==null){
             TerminalView.printString("          Wrong username or password.");

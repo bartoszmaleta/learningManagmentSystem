@@ -10,7 +10,7 @@ public interface UserDao {
     void edit(User user);
     String[] toStringArray(User user);
     User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven);
-    List<User> extractUserFromListByRoleGiven(String roleForList);
+    List<User> extractUsersFromListOfRecordsByRoleGiven(String roleForList);
     int getLastIndex();
 
 }
