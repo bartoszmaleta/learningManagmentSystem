@@ -34,7 +34,7 @@ class PasswordField {
     }
 }
 
-class EraserThread implements Runnable {
+public class EraserThread implements Runnable {
     private boolean stop;
 
     public EraserThread(String prompt) {
