@@ -54,12 +54,12 @@ public class LoginController implements Controller {
         String username = scanner.nextLine();
 
         // OPTION 1 - Ask password with hash!
-//        String password = PasswordField.readPassword("          Enter password: ");
-//        System.out.println("          Password entered was:" + password);
+        String password = PasswordField.readPassword("          Enter password: ");
+        System.out.println("          Password entered was:" + password);
 
         // OPTION 2 -  Ask password without hash!
-        TerminalView.printString("          User password: ");
-        String password = scanner.nextLine();
+//        TerminalView.printString("          User password: ");
+//        String password = scanner.nextLine();
 
         if (new UserDaoFromCSV().readUserByUsernameAndPassword(username,password).getName()==null){
             TerminalView.printString("          Wrong username or password.");
