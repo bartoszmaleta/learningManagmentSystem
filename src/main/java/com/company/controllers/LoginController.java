@@ -57,8 +57,8 @@ public class LoginController implements Controller {
         //        System.out.println("          Password entered was:" + password);
 
         // OPTION 2 -  Ask password without hash!
-        TerminalView.printString("          User password: ");
-        String password = scanner.nextLine();
+       TerminalView.printString("          User password: ");
+       String password = scanner.nextLine();
 
         User user = new UserDaoFromCSV().readUserByUsernameAndPassword(username, password);
         if (user == null) {
