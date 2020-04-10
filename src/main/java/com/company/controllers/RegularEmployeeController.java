@@ -32,9 +32,9 @@ public class RegularEmployeeController implements EmployeeController, Controller
     @Override
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
+        TerminalView.clearScreen();
 
         while (isRunning) {
-            TerminalView.clearScreen();
 
             DataHandler.printFromFile(location + "EmployeeMenu");
 

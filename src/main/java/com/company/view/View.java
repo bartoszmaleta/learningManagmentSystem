@@ -40,7 +40,7 @@ public class View {
     }
 
     public static void viewAllMentors(List<User> mentors) throws FileNotFoundException {
-        DataHandler.printFromFile(location + "MentorList");
+        DataHandler.printFromFile(location + "MentorsList");
         System.out.println(FlipTableConverters.fromIterable(mentors, User.class));
     }
 

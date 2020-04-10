@@ -42,10 +42,9 @@ public class StudentController implements Controller {
     @Override
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
+        TerminalView.clearScreen();
 
         while (isRunning) {
-            TerminalView.clearScreen();
-
             DataHandler.printFromFile(location + "StudentMenu");
 
             int choice = scanner.nextInt();
