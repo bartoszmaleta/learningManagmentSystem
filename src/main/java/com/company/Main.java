@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.controllers.ApplicationController;
 import com.company.controllers.LoginController;
 import com.company.controllers.MentorController;
 import com.company.dao.Parser.CsvParser;
@@ -15,8 +16,6 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        LoginController logging = new LoginController();
-        logging.init();
-
+        ApplicationController applicationController = new ApplicationController();
     }
 }

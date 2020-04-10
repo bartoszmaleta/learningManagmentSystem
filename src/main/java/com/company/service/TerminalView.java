@@ -116,7 +116,7 @@ public class TerminalView {
         System.out.println("Produced by: ");
         System.out.println("Aleksandra Kasaraba");
         System.out.println("Bartosz Maleta");
-        System.out.println("Stanisław ???");
+        System.out.println("Stanisław Chynek");
         System.out.println("Przemysław Buszek\n\n\n");
         pressAnyKeyToContinue();
     }

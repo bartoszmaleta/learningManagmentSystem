@@ -1,18 +1,17 @@
 package com.company.controllers;
 
-import com.company.dao.AssignmentDaoFromCsv;
-import com.company.dao.AttendenceDaoFromCsv;
-import com.company.dao.ClassesDaoFromCsv;
+import com.company.dao.*;
 import com.company.dao.Parser.CsvParser;
-import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
 import com.company.models.Attendence;
 import com.company.models.Class;
+import com.company.models.Grade;
 import com.company.models.users.User;
-import com.company.models.users.students.Student;
 import com.company.service.TerminalManager;
+import com.company.service.TerminalView;
 import com.company.view.View;
 import com.company.view.menu.MentorMenu;
+import com.github.tomaslanger.chalk.Chalk;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MentorController implements EmployeeController {
+public class MentorController implements EmployeeController, Controller {
     private User user;
     UserDaoFromCSV userDaoFromCSV;
     private List<User> studentsList;
@@ -31,6 +30,8 @@ public class MentorController implements EmployeeController {
     private AssignmentDaoFromCsv assignmentDaoFromCsv;
     private ClassesDaoFromCsv classesDaoFromCsv;
     private List<Class> classesList;
+    private GradesDaoFromCsv gradesDaoFromCsv;
+    private List<Grade> gradesList;
 
     public MentorController(User user) {
         this.user = user;
@@ -43,39 +44,51 @@ public class MentorController implements EmployeeController {
 
         classesDaoFromCsv = new ClassesDaoFromCsv();
         classesList = classesDaoFromCsv.extractAllClassesFromList();
+
+        gradesDaoFromCsv = new GradesDaoFromCsv();
+        gradesList = gradesDaoFromCsv.extractAllGrades();
     }
 
-
+    @Override
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
 
+        TerminalView.clearScreen();
+
         while (isRunning) {
-            //        TerminalView.clearScreen();
             MentorMenu.displayMenu();
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
             switch (choice) {
                 case 1:
                     displayStudents();
+                    checkAttendence();
+                    // TODO: to check! cant show because creates after stop!
+//                    displayAttendances();
                     break;
                 case 2:
+                    TerminalView.clearScreen();
                     displayStudents();
                     int studentIdToAddToClass = TerminalManager.askForInt("Enter id of student You want to add to class");
                     User studentToClass = getStudentFromListById(studentIdToAddToClass);
 
                     displayAllClasses();
-//                    displayAllClassesNames();
+//                    displayAllClassesNames();  // TODO: should show just classes names
                     String className = TerminalManager.askForString("Enter name of class to which add student: ");
                     Class classToAdd = getClassFromListByClassName(studentToClass, className);
 
                     addStudentToClass(classToAdd);
                     break;
                 case 3:
+                    TerminalView.clearScreen();
+
                     displayAllClasses();
                     Class classFromWhichStudentShouldBeRemoved = getClassFromProvidedData();
                     removeStudentFromClass(classFromWhichStudentShouldBeRemoved);
                     break;
                 case 4:
+                    TerminalView.clearScreen();
+
                     MentorMenu.displayFirstEditingStudentMenu();
                     displayStudents();
 //                    String studentUsernameToEdit = TerminalManager.askForString("Enter username of student you want to edit");
@@ -86,26 +99,48 @@ public class MentorController implements EmployeeController {
                     editStudent(studentToEdit);
                     break;
                 case 5:
+                    TerminalView.clearScreen();
+
                     displayAllAssignments();
                     Assignment assignmentToAdd = getAssignmentFromProvidedData();
                     addAssignment(assignmentToAdd);
                     break;
                 case 6:
-                    // TODO
-                    displayStudents();
-//                    int studentId = TerminalManager.askForInt("Enter id of student You want to grade");
-//                    User studentToEdit = getStudentFromListById(studentId);
-//
-//                    gradeStudentAssignment();
+                    TerminalView.clearScreen();
+
+                    // TODO: to check!
+                    displayMyStudents();
+                    int studentIdToGrade = TerminalManager.askForInt("Enter id of student You want to grade");
+                    User studentToGrade = getStudentFromListById(studentIdToGrade);
+                    String assignmentTitleToGrade = TerminalManager.askForString("Enter title of assignment to grade");
+
+                    System.out.println("213");
+                    System.out.println(studentToGrade.getName());
+                    System.out.println("213");
+
+                    Grade gradeToAdd = getGradeFromProvidedData(studentToGrade, assignmentTitleToGrade);
+
+                    addGradeToGrades(gradeToAdd);
                     break;
                 case 7:
+                    TerminalView.clearScreen();
                     displayStudents();
-                    // TODO: to check!
-                    checkAttendence2();
-//                    displayAttendances();
                     break;
                 case 8:
+                    TerminalView.clearScreen();
                     displayMyStudents();
+                    break;
+                case 9:
+                    TerminalView.clearScreen();
+                    displayAllGrades();
+                    break;
+                case 10:
+                    TerminalView.clearScreen();
+                    displayAllAssignments();
+                    break;
+                case 11:
+                    TerminalView.clearScreen();
+                    displayAllClasses();
                     break;
                 case 0:
                     isRunning = false;
@@ -114,6 +149,26 @@ public class MentorController implements EmployeeController {
                     System.out.println("Wrong input!");
             }
         }
+    }
+
+    private void displayAllGrades() {
+        View.viewAllGrades(gradesList);
+    }
+
+    private Grade getGradeFromProvidedData(User studentToGrade, String assignmentTitleToGrade) {
+        int id = this.gradesList.get(this.gradesList.size() - 1).getId() + 1;
+        System.out.println("21sd3");
+
+        String assignmentTitle = assignmentTitleToGrade;
+        System.out.println("213");
+        String studentUsername = studentToGrade.getUsername();
+        System.out.println("21ww3");
+
+        int markForAssignment = TerminalManager.askForInt("Enter mark You want to grade "
+                + Chalk.on(studentUsername).green() + " for assignment " + Chalk.on(assignmentTitle).green());
+
+        Grade grade = new Grade(id, assignmentTitle, studentUsername, markForAssignment);
+        return grade;
     }
 
     private void displayMyStudents() {
@@ -166,8 +221,9 @@ public class MentorController implements EmployeeController {
         this.assignmentDaoFromCsv.write(assignment);
     }
 
-    public void gradeStudentAssignment(Student student, String assignmentTitle) {
-
+    public void addGradeToGrades(Grade grade) {
+        this.gradesList.add(grade);
+        this.gradesDaoFromCsv.write(grade);
     }
 
     public void addStudentToClass(Class classToAdd) {
@@ -180,10 +236,10 @@ public class MentorController implements EmployeeController {
         this.classesDaoFromCsv.remove(classToRemoveFrom);
     }
 
-    public void checkAttendence() {
+    public void checkAttendence2() {
         Path path = Paths.get("");
         Path absolutePath = path.toAbsolutePath();
-        String location = absolutePath.toString()+"/src/main/resources/attendences/";
+        String location = absolutePath.toString() + "/src/main/resources/attendences/";
 
         String locationWithDate = location + "attendence" + LocalDate.now();
         CsvParser csvParser = new CsvParser(locationWithDate);
@@ -206,7 +262,7 @@ public class MentorController implements EmployeeController {
         }
     }
 
-    public void checkAttendence2() throws FileNotFoundException {
+    public void checkAttendence() throws FileNotFoundException {
         AttendenceDaoFromCsv attendenceDaoFromCsv = new AttendenceDaoFromCsv();
 
         String[] headers = {"id", "studentUsername", "date", "isPresent"};

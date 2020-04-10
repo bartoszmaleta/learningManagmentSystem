@@ -49,12 +49,10 @@ public class View {
     }
 
     public static void viewAllGrades(List<Grade> grades) {
-        // TODO is it okay Staszek?
         System.out.println(FlipTableConverters.fromIterable(grades, Grade.class));
     }
 
     public static void viewAllAssignments(List<Assignment> assignments) {
-        // TODO is it okay Staszek?
         System.out.println(FlipTableConverters.fromIterable(assignments, Assignment.class));
     }
 

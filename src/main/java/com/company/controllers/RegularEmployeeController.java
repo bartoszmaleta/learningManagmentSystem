@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegularEmployeeController implements EmployeeController {
+public class RegularEmployeeController implements EmployeeController, Controller {
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
     String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
@@ -28,6 +28,7 @@ public class RegularEmployeeController implements EmployeeController {
         studentsList = userDaoFromCSV.extractUsersFromListOfRecordsByRoleGiven("student");
     }
 
+    @Override
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
 

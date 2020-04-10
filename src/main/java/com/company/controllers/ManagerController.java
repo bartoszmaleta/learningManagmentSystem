@@ -10,7 +10,7 @@ import com.company.view.menu.ManagerMenu;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerController implements EmployeeController {
+public class ManagerController implements EmployeeController, Controller {
     private User user;
     private List<User> mentorList;
     private List<User> studentsList;
@@ -27,7 +27,7 @@ public class ManagerController implements EmployeeController {
         regularEmployeesList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("regularEmployee");
     }
 
-
+    @Override
     public void init() {
         boolean isRunning = true;
 

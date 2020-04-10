@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-public class StudentController {
+public class StudentController implements Controller {
 
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
@@ -37,6 +37,7 @@ public class StudentController {
         grades = gradesDaoFromCsv.extractGradesFromListByStudentUsername(user.getUsername());
     }
 
+    @Override
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
 
