@@ -1,5 +1,7 @@
 package com.company.view;
 
+import com.company.dao.Parser.CsvParser;
+import com.company.dao.UserDaoFromCSV;
 import com.company.models.Assignment;
 import com.company.models.Class;
 import com.company.models.Grade;
@@ -33,10 +35,31 @@ public class View {
 //        System.out.println("normal student 0 pass = " + students.get(0).getPassword());
 //        System.out.println("copied student 0 pass = " + legacyDeepCopy.get(0).getPassword());
         //        String[] studentsHeader = { "id", "login", "password", "name", "surname", "role" };
-        //
-        DataHandler.printFromFile(location + "AllStudents");
-        System.out.println(FlipTableConverters.fromIterable(students, User.class));
 //        System.out.println(FlipTableConverters.fromIterable(legacyDeepCopy, User.class));
+
+
+        //        -----------------------------------------------------------------------
+        // THIS WORKS BELOW WITH HASH
+        DataHandler.printFromFile(location + "AllStudents");
+        List<User> newList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("student");
+        String[] headers = {"id", "username", "password", "name", "surname", "role"};
+        Object[][] data = new Object[newList.size()][headers.length];
+
+        for (int i = 0; i < newList.size(); i++) {
+            User user = newList.get(i);
+            data[i][0] = user.getId();
+            data[i][1] = user.getUsername();
+//            data[i][2] = user.getPassword();
+            data[i][2] = "************";
+            data[i][3] = user.getName();
+            data[i][4] = user.getSurname();
+            data[i][5] = user.getRole();
+        }
+        System.out.println(FlipTableConverters.fromObjects(headers, data));
+
+        // THIS WORKS BELOW WITHOUT HASH
+//        DataHandler.printFromFile(location + "AllStudents");
+//        System.out.println(FlipTableConverters.fromIterable(students, User.class));
     }
 
     public static void viewAllMentors(List<User> mentors) throws FileNotFoundException {
