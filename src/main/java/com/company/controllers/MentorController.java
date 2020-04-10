@@ -3,10 +3,11 @@ package com.company.controllers;
 import com.company.dao.*;
 import com.company.dao.Parser.CsvParser;
 import com.company.models.Assignment;
-import com.company.models.Attendence;
+import com.company.models.Attendance;
 import com.company.models.Class;
 import com.company.models.Grade;
 import com.company.models.users.User;
+import com.company.service.DataHandler;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
@@ -22,15 +23,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MentorController implements EmployeeController, Controller {
+
+    private final Path path = Paths.get("");
+    private final Path absolutePath = path.toAbsolutePath();
+    private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
+
     private User user;
-    UserDaoFromCSV userDaoFromCSV;
+    private UserDaoFromCSV userDaoFromCSV;
     private List<User> studentsList;
-    private HashMap<String, ArrayList<User>> classes;
     private List<Assignment> assignmentsList;
     private AssignmentDaoFromCsv assignmentDaoFromCsv;
-    private ClassesDaoFromCsv classesDaoFromCsv;
+    private ClassDaoFromCsv classDaoFromCsv;
     private List<Class> classesList;
-    private GradesDaoFromCsv gradesDaoFromCsv;
+    private GradeDaoFromCsv gradeDaoFromCsv;
     private List<Grade> gradesList;
 
     public MentorController(User user) {
@@ -42,11 +47,11 @@ public class MentorController implements EmployeeController, Controller {
         assignmentDaoFromCsv = new AssignmentDaoFromCsv();
         assignmentsList = assignmentDaoFromCsv.extractAllAssignments();
 
-        classesDaoFromCsv = new ClassesDaoFromCsv();
-        classesList = classesDaoFromCsv.extractAllClassesFromList();
+        classDaoFromCsv = new ClassDaoFromCsv();
+        classesList = classDaoFromCsv.extractAllClassesFromList();
 
-        gradesDaoFromCsv = new GradesDaoFromCsv();
-        gradesList = gradesDaoFromCsv.extractAllGrades();
+        gradeDaoFromCsv = new GradeDaoFromCsv();
+        gradesList = gradeDaoFromCsv.extractAllGrades();
     }
 
     @Override
@@ -56,13 +61,14 @@ public class MentorController implements EmployeeController, Controller {
         TerminalView.clearScreen();
 
         while (isRunning) {
-            MentorMenu.displayMenu();
+            DataHandler.printFromFile(location + "MentorMenu");
+//            MentorMenu.displayMenu();
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
             switch (choice) {
                 case 1:
                     displayStudents();
-                    checkAttendence();
+                    checkAttendance();
                     // TODO: to check! cant show because creates after stop!
 //                    displayAttendances();
                     break;
@@ -148,30 +154,29 @@ public class MentorController implements EmployeeController, Controller {
         }
     }
 
-    private void displayAllGrades() {
+    private void displayAllGrades() throws FileNotFoundException {
         View.viewAllGrades(gradesList);
     }
 
     private Grade getGradeFromProvidedData(User studentToGrade, String assignmentTitleToGrade) {
         int id = this.gradesList.get(this.gradesList.size() - 1).getId() + 1;
 
-        String assignmentTitle = assignmentTitleToGrade;
         String studentUsername = studentToGrade.getUsername();
         int markForAssignment = TerminalManager.askForInt("Enter mark You want to grade "
                 + Chalk.on(studentUsername).green()
                 + " for assignment "
-                + Chalk.on(assignmentTitle).green());
+                + Chalk.on(assignmentTitleToGrade).green());
 
-        Grade grade = new Grade(id, assignmentTitle, studentUsername, markForAssignment);
+        Grade grade = new Grade(id, assignmentTitleToGrade, studentUsername, markForAssignment);
         return grade;
     }
 
-    private void displayMyStudents() {
-        List<Class> myClasses = classesDaoFromCsv.extractClassesFromListByMentorName(this.user.getName());
+    private void displayMyStudents() throws FileNotFoundException {
+        List<Class> myClasses = classDaoFromCsv.extractClassesFromListByMentorName(this.user.getName());
         View.viewAllClasses(myClasses);
     }
 
-    private void displayAllClasses() {
+    private void displayAllClasses() throws FileNotFoundException {
         View.viewAllClasses(classesList);
     }
 
@@ -199,11 +204,9 @@ public class MentorController implements EmployeeController, Controller {
 
     private void displayAllClassesNames() {
         View.viewClassesNames(classesList);
-//        View.viewAllClasses(classesList);
     }
 
     private Assignment getAssignmentFromProvidedData() {
-//        int id = this.assignmentDaoFromCsv.getLastIndex() + 1;
         int id = this.assignmentsList.get(this.assignmentsList.size() - 1).getId() + 1;
         String title = TerminalManager.askForString("Enter title of assignment: ");
         String studentUsername = TerminalManager.askForString("Enter student's username: ");
@@ -218,25 +221,25 @@ public class MentorController implements EmployeeController, Controller {
 
     public void addGradeToGrades(Grade grade) {
         this.gradesList.add(grade);
-        this.gradesDaoFromCsv.write(grade);
+        this.gradeDaoFromCsv.write(grade);
     }
 
     public void addStudentToClass(Class classToAdd) {
         this.classesList.add(classToAdd);
-        this.classesDaoFromCsv.write(classToAdd);
+        this.classDaoFromCsv.write(classToAdd);
     }
 
     public void removeStudentFromClass(Class classToRemoveFrom) {
         this.classesList.remove(classToRemoveFrom);
-        this.classesDaoFromCsv.remove(classToRemoveFrom);
+        this.classDaoFromCsv.remove(classToRemoveFrom);
     }
 
-    public void checkAttendence2() {
+    public void checkAttendance2() {
         Path path = Paths.get("");
         Path absolutePath = path.toAbsolutePath();
-        String location = absolutePath.toString() + "/src/main/resources/attendences/";
+        String location = absolutePath.toString() + "/src/main/resources/attendance/";
 
-        String locationWithDate = location + "attendence" + LocalDate.now();
+        String locationWithDate = location + "attendance" + LocalDate.now();
         CsvParser csvParser = new CsvParser(locationWithDate);
 
         String[] headers = {"id", "studentUsername", "date", "isPresent"};
@@ -245,20 +248,20 @@ public class MentorController implements EmployeeController, Controller {
             String isPresentStudent = TerminalManager.
                     askForString("Is student with name "
                             + this.studentsList.get(i).getName() + " present today?");
-            Attendence attendence = new Attendence(i + 1
+            Attendance attendance = new Attendance(i + 1
                     , LocalDate.now()
                     , this.studentsList.get(i).getUsername()
                     , isPresentStudent);
             if (i == 0) {
-                csvParser.addFirstRecord(attendence.toStringArray(), headers);
+                csvParser.addFirstRecord(attendance.toStringArray(), headers);
             } else {
-                csvParser.addNewRecord(attendence.toStringArray());
+                csvParser.addNewRecord(attendance.toStringArray());
             }
         }
     }
 
-    public void checkAttendence() throws FileNotFoundException {
-        AttendenceDaoFromCsv attendenceDaoFromCsv = new AttendenceDaoFromCsv();
+    public void checkAttendance() throws FileNotFoundException {
+        AttendanceDaoFromCsv attendanceDaoFromCsv = new AttendanceDaoFromCsv();
 
         String[] headers = {"id", "studentUsername", "date", "isPresent"};
 
@@ -266,14 +269,14 @@ public class MentorController implements EmployeeController, Controller {
             String isPresentStudent = TerminalManager.
                     askForString("Is student with name "
                             + Chalk.on(this.studentsList.get(i).getName()).green() + " present today?");
-            Attendence attendence = new Attendence(i + 1
+            Attendance attendance = new Attendance(i + 1
                     , LocalDate.now()
                     , this.studentsList.get(i).getUsername()
                     , isPresentStudent);
             if (i == 0) {
-                attendenceDaoFromCsv.writeFirstRecord(attendence, headers);
+                attendanceDaoFromCsv.writeFirstRecord(attendance, headers);
             } else {
-                attendenceDaoFromCsv.write(attendence);
+                attendanceDaoFromCsv.write(attendance);
             }
         }
     }
@@ -330,11 +333,11 @@ public class MentorController implements EmployeeController, Controller {
     }
 
     @Override
-    public void displayStudents() {
+    public void displayStudents() throws FileNotFoundException {
         View.viewAllStudents(studentsList);
     }
 
-    public void displayAllAssignments() {
+    public void displayAllAssignments() throws FileNotFoundException {
         View.viewAllAssignments(assignmentsList);
     }
 }

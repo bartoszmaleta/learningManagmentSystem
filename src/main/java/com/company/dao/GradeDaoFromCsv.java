@@ -1,13 +1,12 @@
 package com.company.dao;
 
 import com.company.dao.Parser.CsvParser;
-import com.company.models.Assignment;
 import com.company.models.Grade;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GradesDaoFromCsv implements GradesDao {
+public class GradeDaoFromCsv implements GradeDao {
     private final int idIndex = 0;
     private final int assignmentTitleIndex = 1;
     private final int studentUsernametIndex = 2;
@@ -18,7 +17,7 @@ public class GradesDaoFromCsv implements GradesDao {
     private Grade grade;
     private String filepathOfGradesCsv = "src/main/resources/grades.csv";
 
-    public GradesDaoFromCsv() {
+    public GradeDaoFromCsv() {
         this.csvParser = new CsvParser(filepathOfGradesCsv);
         this.listOfRecords = csvParser.getUpdatedList();
     }

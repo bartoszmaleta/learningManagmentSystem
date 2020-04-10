@@ -5,7 +5,7 @@ import com.company.models.Class;
 
 import java.util.List;
 
-public interface ClassesDao {
+public interface ClassDao {
     void write(Class classes);
     void remove(Class classes);
     void edit(Class classes);

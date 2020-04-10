@@ -1,12 +1,13 @@
 package com.company.controllers;
 
 import com.company.dao.AssignmentDaoFromCsv;
-import com.company.dao.GradesDaoFromCsv;
+import com.company.dao.GradeDaoFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
 import com.company.service.DataHandler;
 import com.company.service.TerminalManager;
+import com.company.service.TerminalView;
 import com.company.view.View;
 
 import java.io.FileNotFoundException;
@@ -17,24 +18,25 @@ import java.util.Scanner;
 
 public class StudentController implements Controller {
 
-    Path path = Paths.get("");
-    Path absolutePath = path.toAbsolutePath();
-    String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
+    private final Path path = Paths.get("");
+    private final Path absolutePath = path.toAbsolutePath();
+    private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+
     private User user;
     private List<Assignment> assignments;
     private List<Grade> grades;
-    AssignmentDaoFromCsv assignmentDAOFromCSV;
-    GradesDaoFromCsv gradesDaoFromCsv;
+    private AssignmentDaoFromCsv assignmentDAOFromCSV;
+    private GradeDaoFromCsv gradeDaoFromCsv;
 
 
     public StudentController(User user) {
-        System.out.println("Student Controller constructor here");
+        this.user = user;
         assignmentDAOFromCSV = new AssignmentDaoFromCsv();
         assignments = assignmentDAOFromCSV.extractAssignmentsFromListByStudentUsername(user.getUsername());
-        gradesDaoFromCsv = new GradesDaoFromCsv();
-        grades = gradesDaoFromCsv.extractGradesFromListByStudentUsername(user.getUsername());
+        gradeDaoFromCsv = new GradeDaoFromCsv();
+        grades = gradeDaoFromCsv.extractGradesFromListByStudentUsername(user.getUsername());
     }
 
     @Override
@@ -42,8 +44,7 @@ public class StudentController implements Controller {
         boolean isRunning = true;
 
         while (isRunning) {
-//            TerminalView.clearScreen();
-//            StudentMenu.displayMenu();
+            TerminalView.clearScreen();
 
             DataHandler.printFromFile(location + "StudentMenu");
 
@@ -51,9 +52,11 @@ public class StudentController implements Controller {
 
             switch (choice) {
                 case 1:
+                    TerminalView.clearScreen();
                     displayGrades();
                     break;
                 case 2:
+                    TerminalView.clearScreen();
                     displayAssignments();
                     int indexOfAssignmentToSubmit = TerminalManager.askForInt("Which assignment You want to submit?");
                     Assignment assignmentToSubmit = getAssignmentFromListById(indexOfAssignmentToSubmit);
@@ -90,12 +93,12 @@ public class StudentController implements Controller {
         return null;
     }
 
-    public void displayAssignments() {
+    public void displayAssignments() throws FileNotFoundException {
         View.viewAllAssignments(assignments);
     }
 
 
-    public void displayGrades() {
+    public void displayGrades() throws FileNotFoundException {
         View.viewAllGrades(grades);
     }
 

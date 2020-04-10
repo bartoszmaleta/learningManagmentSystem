@@ -3,6 +3,7 @@ package com.company.controllers;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.service.DataHandler;
+import com.company.service.TerminalView;
 import com.company.view.View;
 
 import java.io.FileNotFoundException;
@@ -33,8 +34,7 @@ public class RegularEmployeeController implements EmployeeController, Controller
         boolean isRunning = true;
 
         while (isRunning) {
-//            TerminalView.clearScreen();
-//            StudentMenu.displayMenu();
+            TerminalView.clearScreen();
 
             DataHandler.printFromFile(location + "EmployeeMenu");
 
@@ -42,6 +42,7 @@ public class RegularEmployeeController implements EmployeeController, Controller
 
             switch (choice) {
                 case 1:
+                    TerminalView.clearScreen();
                     displayStudents();
                     break;
                 case 2:
@@ -60,7 +61,7 @@ public class RegularEmployeeController implements EmployeeController, Controller
     }
 
     @Override
-    public void displayStudents() {
+    public void displayStudents() throws FileNotFoundException {
         View.viewAllStudents(studentsList);
     }
 }

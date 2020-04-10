@@ -1,11 +1,8 @@
 package com.company.dao;
 
 import com.company.dao.Parser.CsvParser;
-import com.company.models.Assignment;
-import com.company.models.Attendence;
-import com.company.service.DataHandler;
+import com.company.models.Attendance;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendenceDaoFromCsv implements AttendenceDao{
+public class AttendanceDaoFromCsv implements AttendanceDao {
     private final int idIndex = 0;
     private final int localDateIndex = 1;
     private final int studentUsernameIndex = 2;
@@ -21,7 +18,6 @@ public class AttendenceDaoFromCsv implements AttendenceDao{
 
     private final CsvParser csvParser;
     private List<List<String>> listOfRecords;
-    private Attendence attendence;
     private final String pathFromContentRoot = "src/main/resources/attendance.csv";
 
     Path path = Paths.get("");
@@ -29,18 +25,18 @@ public class AttendenceDaoFromCsv implements AttendenceDao{
     String location = absolutePath.toString() + pathFromContentRoot;
     String locationWithDate = location + "attendance" + LocalDate.now();
 
-    public AttendenceDaoFromCsv() throws FileNotFoundException {
+    public AttendanceDaoFromCsv() throws FileNotFoundException {
         this.csvParser = new CsvParser(locationWithDate);
     }
 
     @Override
-    public void write(Attendence attendence) {
-        String[] toStringArrayAssignment = attendence.toStringArray();
+    public void write(Attendance attendance) {
+        String[] toStringArrayAssignment = attendance.toStringArray();
         this.csvParser.addNewRecord(toStringArrayAssignment);
     }
 
     @Override
-    public String[] toStringArray(Attendence attendence) {
+    public String[] toStringArray(Attendance attendance) {
         return new String[0];
     }
 
@@ -50,30 +46,30 @@ public class AttendenceDaoFromCsv implements AttendenceDao{
     }
 
     @Override
-    public void writeFirstRecord(Attendence attendence, String[] headers) {
-        String[] toStringArrayAssignment = attendence.toStringArray();
+    public void writeFirstRecord(Attendance attendance, String[] headers) {
+        String[] toStringArrayAssignment = attendance.toStringArray();
         this.csvParser.addFirstRecord(toStringArrayAssignment, headers);
     }
 
     @Override
-    public List<Attendence> extractAllAttendences() {
+    public List<Attendance> extractAllAttendances() {
         String id, username, isPresent;
         LocalDate localDate;
 
-        List<Attendence> attendancesList = new ArrayList<>();
+        List<Attendance> attendancesList = new ArrayList<>();
 
         for (int i = 0; i < this.listOfRecords.size(); i++) {
-            List<String> attendences = this.listOfRecords.get(i);
-            id = attendences.get(idIndex);
-            localDate = LocalDate.parse(attendences.get(localDateIndex));
-            username = attendences.get(studentUsernameIndex);
-            if (attendences.get(isPresentIndex).equals("true")) {
+            List<String> attendances = this.listOfRecords.get(i);
+            id = attendances.get(idIndex);
+            localDate = LocalDate.parse(attendances.get(localDateIndex));
+            username = attendances.get(studentUsernameIndex);
+            if (attendances.get(isPresentIndex).equals("true")) {
                 isPresent = "y";
             } else {
                 isPresent = "n";
             }
 
-            attendancesList.add(new Attendence(Integer.parseInt(id), localDate, username, isPresent));
+            attendancesList.add(new Attendance(Integer.parseInt(id), localDate, username, isPresent));
         }
         return attendancesList;
     }

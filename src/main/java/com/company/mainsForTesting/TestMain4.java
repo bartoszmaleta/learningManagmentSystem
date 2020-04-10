@@ -1,4 +1,4 @@
-package com.company;
+package com.company.mainsForTesting;
 
 import com.company.dao.notUsedDao.MentorDao;
 import com.company.dao.Parser.CsvParser;
@@ -8,12 +8,12 @@ import com.company.view.View;
 
 import com.company.controllers.ManagerController;
 import com.company.dao.notUsedDao.ManagerDao;
-import com.company.models.users.employees.Manager;
+import com.company.models.users.notUsedModels.employees.Manager;
 
 /**
  * Hello world!
  */
-public class App {
+public class TestMain4 {
     public static void main(String[] args) {
 //        __________________________________________________________
 //        LoggingController logging = new LoggingController();
@@ -72,7 +72,6 @@ public class App {
 //                4,tommy,password4,tom,thompson,mentor,
 //                5,lizhenli,password5,li,zhen,student,
         ManagerController managerController = new ManagerController(new Manager(1, "2", "3", "4", "5", "6"));
-        managerController.init();
 
     }
 }
