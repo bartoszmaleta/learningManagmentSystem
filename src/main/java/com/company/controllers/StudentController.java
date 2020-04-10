@@ -5,7 +5,7 @@ import com.company.dao.GradeDaoFromCsv;
 import com.company.models.Assignment;
 import com.company.models.Grade;
 import com.company.models.users.User;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
@@ -22,20 +22,17 @@ public class StudentController implements Controller {
     private final Path absolutePath = path.toAbsolutePath();
     private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
 
-    private Scanner scanner = new Scanner(System.in);
-
     private User user;
-    private List<Assignment> assignments;
-    private List<Grade> grades;
-    private AssignmentDaoFromCsv assignmentDAOFromCSV;
-    private GradeDaoFromCsv gradeDaoFromCsv;
+    private final List<Assignment> assignments;
+    private final List<Grade> grades;
+    private final AssignmentDaoFromCsv assignmentDAOFromCSV;
 
 
     public StudentController(User user) {
         this.user = user;
         assignmentDAOFromCSV = new AssignmentDaoFromCsv();
         assignments = assignmentDAOFromCSV.extractAssignmentsFromListByStudentUsername(user.getUsername());
-        gradeDaoFromCsv = new GradeDaoFromCsv();
+        GradeDaoFromCsv gradeDaoFromCsv = new GradeDaoFromCsv();
         grades = gradeDaoFromCsv.extractGradesFromListByStudentUsername(user.getUsername());
     }
 
@@ -45,9 +42,9 @@ public class StudentController implements Controller {
         TerminalView.clearScreen();
 
         while (isRunning) {
-            DataHandler.printFromFile(location + "StudentMenu");
+            FileReader.printFromFile(location + "StudentMenu");
 
-            int choice = scanner.nextInt();
+            int choice = TerminalManager.takeIntInputWithoutMessage();
 
             switch (choice) {
                 case 1:

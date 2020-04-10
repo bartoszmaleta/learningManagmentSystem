@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class CsvParser implements Parser {
     private List<List<String>> listOfLines;
-    private String fileName;
+    private final String fileName;
     private String fileString;
     private List<String> lineAsList;
 
@@ -35,8 +35,7 @@ public class CsvParser implements Parser {
             Scanner scanner = new Scanner(file);
             scanner.nextLine();
             while (scanner.hasNext()) {
-                fileString += scanner.nextLine();
-                fileString += "\n";
+                fileString += scanner.nextLine() + "\n";
             }
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -70,7 +69,7 @@ public class CsvParser implements Parser {
     public void addNewRecord(String[] newRecord) {
         try {
             FileWriter fw = new FileWriter(this.fileName, true);
-            fw.append("\n" + String.join(",", newRecord) + ",");
+            fw.append("\n").append(String.join(",", newRecord)).append(",");
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

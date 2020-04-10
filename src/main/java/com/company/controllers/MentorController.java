@@ -7,11 +7,11 @@ import com.company.models.Attendance;
 import com.company.models.Class;
 import com.company.models.Grade;
 import com.company.models.users.User;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
-import com.company.view.menu.MentorMenu;
+import com.company.view.menuNotUsed.MentorMenu;
 import com.github.tomaslanger.chalk.Chalk;
 
 import java.io.FileNotFoundException;
@@ -26,15 +26,15 @@ public class MentorController implements EmployeeController, Controller {
     private final Path absolutePath = path.toAbsolutePath();
     private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
 
-    private User user;
-    private UserDaoFromCSV userDaoFromCSV;
-    private List<User> studentsList;
-    private List<Assignment> assignmentsList;
-    private AssignmentDaoFromCsv assignmentDaoFromCsv;
-    private ClassDaoFromCsv classDaoFromCsv;
-    private List<Class> classesList;
-    private GradeDaoFromCsv gradeDaoFromCsv;
-    private List<Grade> gradesList;
+    private final User user;
+    private final UserDaoFromCSV userDaoFromCSV;
+    private final List<User> studentsList;
+    private final List<Assignment> assignmentsList;
+    private final AssignmentDaoFromCsv assignmentDaoFromCsv;
+    private final ClassDaoFromCsv classDaoFromCsv;
+    private final List<Class> classesList;
+    private final GradeDaoFromCsv gradeDaoFromCsv;
+    private final List<Grade> gradesList;
 
     public MentorController(User user) {
         this.user = user;
@@ -59,9 +59,10 @@ public class MentorController implements EmployeeController, Controller {
         TerminalView.clearScreen();
 
         while (isRunning) {
-            DataHandler.printFromFile(location + "MentorMenu");
+            FileReader.printFromFile(location + "MentorMenu");
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
+
             switch (choice) {
                 case 1:
                     TerminalView.clearScreen();

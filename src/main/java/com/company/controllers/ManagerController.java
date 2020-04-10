@@ -1,19 +1,19 @@
 package com.company.controllers;
 
+import com.company.dao.UserDao;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.models.users.notUsedModels.employees.Mentor;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.company.service.TerminalManager;
 import com.company.service.TerminalView;
 import com.company.view.View;
-import com.company.view.menu.ManagerMenu;
+import com.company.view.menuNotUsed.ManagerMenu;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 
 public class ManagerController implements EmployeeController, Controller {
 
@@ -22,18 +22,17 @@ public class ManagerController implements EmployeeController, Controller {
     private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
 
     private User user;
-    private List<User> mentorList;
-    private List<User> studentsList;
-    private List<User> regularEmployeesList;
-    Scanner scanner = new Scanner(System.in);
-    UserDaoFromCSV userDAOFromCSV;
+    private final List<User> mentorList;
+    private final List<User> studentsList;
+    private final List<User> regularEmployeesList;
+    private final UserDao userDAOFromCSV;
 
     public ManagerController(User user) {
         userDAOFromCSV = new UserDaoFromCSV();
         this.user = user;
-        mentorList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("mentor");
-        studentsList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("student");
-        regularEmployeesList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("regularEmployee");
+        mentorList = userDAOFromCSV.extractUsersFromListOfRecordsByRoleGiven("mentor");
+        studentsList = userDAOFromCSV.extractUsersFromListOfRecordsByRoleGiven("student");
+        regularEmployeesList = userDAOFromCSV.extractUsersFromListOfRecordsByRoleGiven("regularEmployee");
     }
 
     @Override
@@ -42,9 +41,11 @@ public class ManagerController implements EmployeeController, Controller {
         TerminalView.clearScreen();
 
         while (isRunning) {
-            DataHandler.printFromFile(location + "ManagerMenu");
+            FileReader.printFromFile(location + "ManagerMenu");
 
-            int choice = scanner.nextInt();
+            int choice = TerminalManager.takeIntInputWithoutMessage();
+            // TODO: InputProvider.askForInt(String message, String onErrorMessage, int
+            // TODO: start, int end, int limit, String exit)
 
             switch (choice) {
                 case 1:
@@ -128,9 +129,8 @@ public class ManagerController implements EmployeeController, Controller {
         this.userDAOFromCSV.edit(mentor);
     }
 
-    public User getMentorFromProvidedData() {
-//        int id = TerminalManager.askForInt("Enter mentor's id: ");
-        int id = this.userDAOFromCSV.getLastIndex() + 1;
+    public User getMentorFromProvidedData() { // TODO consider changing the name of this method.
+        int id = getNextMentorId();
         String username = TerminalManager.askForString("Enter mentor's username: ");
         String password = TerminalManager.askForString("Enter mentor's password: ");
         String name = TerminalManager.askForString("Enter mentor's name: ");
@@ -139,17 +139,23 @@ public class ManagerController implements EmployeeController, Controller {
         return new User(id, username, password, name, surname, "mentor");
     }
 
+    private int getNextMentorId() {
+        return this.userDAOFromCSV.getLastIndex() + 1;
+    }
+
     public User getMentorFromListByUsername(String username) {
         for (User user : mentorList) {
             if (user.getRole().equals("mentor")) {
                 if (user.getUsername().equals(username)) {
                     return user;
+//                    return Optional.ofNullable(user);
                 }
             }
         }
         // TODO: no user handle!
         TerminalManager.printString("No user found");
         return null;
+//        return Optional.empty(); // return Optional.of(User)
     }
 
     public void displayMentors() throws FileNotFoundException {

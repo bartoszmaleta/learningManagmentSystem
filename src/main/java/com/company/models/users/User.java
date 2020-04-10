@@ -8,7 +8,7 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private String role;
+    private String role; // TODO great place for enum folks
     private int id;
 
     public User(int id, String username, String password, String name, String surname, String role) {

@@ -1,7 +1,4 @@
-package com.company.view.menu;
-
-import java.sql.SQLException;
-import java.util.Scanner;
+package com.company.view.menuNotUsed;
 
 
 //import database.SqlConnector;

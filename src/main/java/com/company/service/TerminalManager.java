@@ -5,47 +5,14 @@ import java.util.Scanner;
 public class TerminalManager {
 
     public static void clearScreen() {
-//        multiSign(30, "----------------------- Clear Screen -----------------------");
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println("\n".repeat(30));
         System.out.println("----------------------- Clear Screen -----------------------");
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     public static String multiSign(int multiplication, String sign) {
-        String out = "";
-
-        for (int i = 0; i < multiplication; i++) {
-            out += sign;
-        }
-        return out;
+        return String.valueOf(sign).repeat(Math.max(0, multiplication));
     }
 
     public static String askForString(String question) {
@@ -67,7 +34,7 @@ public class TerminalManager {
         Scanner scanner = new Scanner(System.in);
         String output = scanner.next();
         while (!output.matches("[0-9]+")) {
-            printString("Use only numbers");
+            System.out.println("            Wrong input! Choose only numbers!");
             output = scanner.next();
         }
         return Integer.parseInt(output);
@@ -78,7 +45,7 @@ public class TerminalManager {
         Scanner scanner = new Scanner(System.in);
         String out = scanner.next();
         while (!out.matches("[0-9]+")) {
-            printString("Use only numbers");
+            System.out.println("            Wrong input! Choose only numbers!");
             out = scanner.next();
         }
         return Integer.valueOf(out);
@@ -130,6 +97,4 @@ public class TerminalManager {
 
         return false;
     }
-
-
 }
