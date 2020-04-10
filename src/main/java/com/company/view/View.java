@@ -40,7 +40,7 @@ public class View {
 
         //        -----------------------------------------------------------------------
         // THIS WORKS BELOW WITH HASH
-        DataHandler.printFromFile(location + "AllStudents");
+        DataHandler.printFromFile(location + "StudentsList");
         List<User> newList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("student");
         String[] headers = {"id", "username", "password", "name", "surname", "role"};
         Object[][] data = new Object[newList.size()][headers.length];
@@ -72,7 +72,7 @@ public class View {
     }
 
     public static void viewAllGrades(List<Grade> grades) throws FileNotFoundException {
-        DataHandler.printFromFile(location + "AllGrades");
+        DataHandler.printFromFile(location + "Grades");
         System.out.println(FlipTableConverters.fromIterable(grades, Grade.class));
     }
 
