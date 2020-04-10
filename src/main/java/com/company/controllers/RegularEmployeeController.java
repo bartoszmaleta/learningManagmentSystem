@@ -2,7 +2,7 @@ package com.company.controllers;
 
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.company.service.TerminalView;
 import com.company.view.View;
 
@@ -36,7 +36,7 @@ public class RegularEmployeeController implements EmployeeController, Controller
 
         while (isRunning) {
 
-            DataHandler.printFromFile(location + "EmployeeMenu");
+            FileReader.printFromFile(location + "EmployeeMenu");
 
             int choice = scanner.nextInt();
 

@@ -2,9 +2,8 @@ package com.company.controllers;
 
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
-import com.company.service.DataHandler;
+import com.company.service.FileReader;
 import com.company.service.TerminalView;
-import com.company.service.passwordHasher.PasswordField;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -15,7 +14,7 @@ public class LoginController implements Controller {
     Scanner scanner = new Scanner(System.in);
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
-    String location = absolutePath.toString()+"/src/main/resources/Menu CcMS/Small/";
+    String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
 
     @Override
     public void init() throws FileNotFoundException {
@@ -23,9 +22,9 @@ public class LoginController implements Controller {
 
         while (isRunning) {
             TerminalView.clearScreen();
-            DataHandler.printFromFile(location + "MainScreen");
+            FileReader.printFromFile(location + "MainScreen");
             TerminalView.displayWelcomeScreen();
-            DataHandler.printFromFile(location + "MainMenu");
+            FileReader.printFromFile(location + "MainMenu");
 
             int choice = scanner.nextInt();
 
@@ -34,7 +33,7 @@ public class LoginController implements Controller {
                     loggingUser();
                     break;
                 case 2:
-                    DataHandler.printFromFile(location + "Credits");
+                    FileReader.printFromFile(location + "Credits");
                     break;
                 case 0:
                     isRunning = false;
@@ -46,7 +45,7 @@ public class LoginController implements Controller {
     }
 
     public void loggingUser() throws FileNotFoundException {
-        DataHandler.printFromFile(location + "LoginMenu");
+        FileReader.printFromFile(location + "LoginMenu");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -54,30 +53,47 @@ public class LoginController implements Controller {
         String username = scanner.nextLine();
 
         // OPTION 1 - Ask password with hash!
-//        String password = PasswordField.readPassword("          Enter password: ");
-//        System.out.println("          Password entered was:" + password);
+        //        String password = PasswordField.readPassword("          Enter password: ");
+        //        System.out.println("          Password entered was:" + password);
 
         // OPTION 2 -  Ask password without hash!
         TerminalView.printString("          User password: ");
         String password = scanner.nextLine();
 
-        if (new UserDaoFromCSV().readUserByUsernameAndPassword(username,password).getName()==null){
+        User user = new UserDaoFromCSV().readUserByUsernameAndPassword(username, password);
+        if (user == null) {
             TerminalView.printString("          Wrong username or password.");
-        } else {
-            User user = new UserDaoFromCSV().readUserByUsernameAndPassword(username,password);
-            if (user.getRole().equals("manager")) {
-                ManagerController managerController = new ManagerController(user);
-                managerController.init();
-            } else if (user.getRole().equals("student")) {
-                StudentController studentController = new StudentController(user);
-                studentController.init();
-            } else if (user.getRole().equals("mentor")) {
-                MentorController mentorController = new MentorController(user);
-                mentorController.init();
-            } else if (user.getRole().equals("regularEmployee")) {
+            return;
+        }
+        switch (user.getRole()) {
+            case "manager":
+                handleManager(user);
+                break;
+            case "student":
+                handleStudent(user);
+                break;
+            case "mentor":
+                handleMentor(user);
+                break;
+            case "regularEmployee":
                 RegularEmployeeController regularEmployeeController = new RegularEmployeeController(user);
                 regularEmployeeController.init();
-            }
+                break;
         }
+    }
+
+    private void handleMentor(User user) throws FileNotFoundException {
+        MentorController mentorController = new MentorController(user);
+        mentorController.init();
+    }
+
+    private void handleStudent(User user) throws FileNotFoundException {
+        StudentController studentController = new StudentController(user);
+        studentController.init();
+    }
+
+    private void handleManager(User user) throws FileNotFoundException {
+        ManagerController managerController = new ManagerController(user);
+        managerController.init();
     }
 }

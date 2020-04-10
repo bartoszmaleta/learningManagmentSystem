@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class DataHandler {
+public class FileReader {
 
     public static void  printFromFile(String filepath) throws FileNotFoundException {
 //        TerminalManager.clearScreen();
