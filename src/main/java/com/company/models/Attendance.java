@@ -2,13 +2,13 @@ package com.company.models;
 
 import java.time.LocalDate;
 
-public class Attendence {
+public class Attendance {
     private int id;
     private LocalDate localDate;
     private String studentUsername;
     private boolean isPresent;
 
-    public Attendence(int id, LocalDate localDate, String studentUsername, String isPresentString) {
+    public Attendance(int id, LocalDate localDate, String studentUsername, String isPresentString) {
         this.id = id;
         this.localDate = localDate;
         this.studentUsername = studentUsername;

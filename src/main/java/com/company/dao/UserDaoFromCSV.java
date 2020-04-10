@@ -25,10 +25,6 @@ public class UserDaoFromCSV implements UserDao {
         listOfRecords = csvParser.getUpdatedList();
     }
 
-    public CsvParser getCsvParser() {
-        return csvParser;
-    }
-
     @Override
     public void write(User user) {
         String[] toStringArrayUser = toStringArray(user);
@@ -115,12 +111,6 @@ public class UserDaoFromCSV implements UserDao {
         newList = this.listOfRecords;
         String header = "id,username,password,name,surname,role,";
         this.csvParser.updateFile(newList, header);
-    }
-
-
-    private String toString(User user) {
-
-        return null;
     }
 
     @Override

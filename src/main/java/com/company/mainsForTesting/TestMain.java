@@ -1,15 +1,13 @@
-package com.company;
+package com.company.mainsForTesting;
 
 import com.company.dao.Parser.CsvParser;
-import com.company.models.Attendence;
-import com.company.models.users.User;
+import com.company.models.Attendance;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class TestMain {
@@ -56,7 +54,7 @@ public class TestMain {
 
         System.out.println("--------------------");
         CsvParser csvParser = new CsvParser(locationWithDate);
-        Attendence attendence = new Attendence(1, LocalDate.now(), "qwe", "y");
+        Attendance attendence = new Attendance(1, LocalDate.now(), "qwe", "y");
 //        csvParser.addFirstRecord(attendence.toStringArray());
 //        csvParser.addNewRecord(attendence.toStringArray());
 

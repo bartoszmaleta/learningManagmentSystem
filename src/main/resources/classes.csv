@@ -1,4 +1,4 @@
-id,title,studentUsername,mentorName,
+id,className,studentUsername,mentorName,
 1,java,bartoszmal,Adam,
 2,python,thomson,Adrian,
 3,java,olaLogin,Adrian,

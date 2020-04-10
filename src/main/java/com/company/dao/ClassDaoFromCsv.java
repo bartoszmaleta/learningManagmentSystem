@@ -6,7 +6,7 @@ import com.company.models.Class;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassesDaoFromCsv implements ClassesDao {
+public class ClassDaoFromCsv implements ClassDao {
     int idIndex = 0;
     int titleIndex = 1;
     int studentUsernameIndex = 2;
@@ -17,7 +17,7 @@ public class ClassesDaoFromCsv implements ClassesDao {
     private Class classes;
     private String filepathOfClassesCsv = "src/main/resources/classes.csv";
 
-    public ClassesDaoFromCsv() {
+    public ClassDaoFromCsv() {
         this.csvParser = new CsvParser(filepathOfClassesCsv);
         this.listOfRecords = csvParser.getUpdatedList();
     }
@@ -55,7 +55,7 @@ public class ClassesDaoFromCsv implements ClassesDao {
             }
         }
         newList = this.listOfRecords;
-        String header = "id,title,studentUsername,mentorName,";
+        String header = "id,className,studentUsername,mentorName,";
         this.csvParser.updateFile(newList, header);
     }
 
@@ -70,7 +70,7 @@ public class ClassesDaoFromCsv implements ClassesDao {
             }
         }
         newList = this.listOfRecords;
-        String header = "id,title,studentUsername,mentorName,";
+        String header = "id,className,studentUsername,mentorName,";
         this.csvParser.updateFile(newList, header);
     }
 

@@ -1,4 +1,4 @@
-package com.company.models.users.employees;
+package com.company.models.users.notUsedModels.employees;
 
 import com.company.models.users.User;
 

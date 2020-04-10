@@ -2,15 +2,25 @@ package com.company.controllers;
 
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
-import com.company.models.users.employees.Mentor;
+import com.company.models.users.notUsedModels.employees.Mentor;
+import com.company.service.DataHandler;
 import com.company.service.TerminalManager;
+import com.company.service.TerminalView;
 import com.company.view.View;
 import com.company.view.menu.ManagerMenu;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerController implements EmployeeController {
+public class ManagerController implements EmployeeController, Controller {
+
+    private final Path path = Paths.get("");
+    private final Path absolutePath = path.toAbsolutePath();
+    private final String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
+
     private User user;
     private List<User> mentorList;
     private List<User> studentsList;
@@ -19,7 +29,6 @@ public class ManagerController implements EmployeeController {
     UserDaoFromCSV userDAOFromCSV;
 
     public ManagerController(User user) {
-        System.out.println("Manager Controller constructor here");
         userDAOFromCSV = new UserDaoFromCSV();
         this.user = user;
         mentorList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("mentor");
@@ -27,27 +36,30 @@ public class ManagerController implements EmployeeController {
         regularEmployeesList = new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("regularEmployee");
     }
 
-
-    public void init() {
+    @Override
+    public void init() throws FileNotFoundException {
         boolean isRunning = true;
+        TerminalView.clearScreen();
 
         while (isRunning) {
-//            TerminalView.clearScreen();
-            ManagerMenu.displayMenu();
+            DataHandler.printFromFile(location + "ManagerMenu");
 
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
+                    TerminalView.clearScreen();
                     User mentorToAdd = getMentorFromProvidedData();
                     addMentor(mentorToAdd);
                     break;
                 case 2:
+                    TerminalView.clearScreen();
                     displayMentors();
                     String usernameOfMentorToRemove = TerminalManager.askForString("Enter username of mentor you want to remove: ");
                     removeMentor(getMentorFromListByUsername(usernameOfMentorToRemove));
                     break;
                 case 3:
+                    TerminalView.clearScreen();
                     ManagerMenu.displayFirstEditingMentorMenu();
                     displayMentors();
                     String usernameOfMentorToEdit = TerminalManager.askForString("\n" + "Enter username of mentor you want to edit: ");
@@ -56,9 +68,11 @@ public class ManagerController implements EmployeeController {
                     editMentor(mentorToEdit);
                     break;
                 case 4:
+                    TerminalView.clearScreen();
                     displayMentors();
                     break;
                 case 5:
+                    TerminalView.clearScreen();
                     displayStudents();
                     break;
                 case 0:
@@ -138,7 +152,7 @@ public class ManagerController implements EmployeeController {
         return null;
     }
 
-    public void displayMentors() {
+    public void displayMentors() throws FileNotFoundException {
         View.viewAllMentors(new UserDaoFromCSV().extractUsersFromListOfRecordsByRoleGiven("mentor"));
     }
 
@@ -147,7 +161,7 @@ public class ManagerController implements EmployeeController {
     }
 
     @Override
-    public void displayStudents() {
+    public void displayStudents() throws FileNotFoundException {
         View.viewAllStudents(studentsList);
     }
 

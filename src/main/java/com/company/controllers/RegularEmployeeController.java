@@ -3,6 +3,7 @@ package com.company.controllers;
 import com.company.dao.UserDaoFromCSV;
 import com.company.models.users.User;
 import com.company.service.DataHandler;
+import com.company.service.TerminalView;
 import com.company.view.View;
 
 import java.io.FileNotFoundException;
@@ -11,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegularEmployeeController implements EmployeeController {
+public class RegularEmployeeController implements EmployeeController, Controller {
     Path path = Paths.get("");
     Path absolutePath = path.toAbsolutePath();
     String location = absolutePath.toString() + "/src/main/resources/Menu CcMS/Small/";
@@ -28,12 +29,12 @@ public class RegularEmployeeController implements EmployeeController {
         studentsList = userDaoFromCSV.extractUsersFromListOfRecordsByRoleGiven("student");
     }
 
+    @Override
     public void init() throws FileNotFoundException {
         boolean isRunning = true;
+        TerminalView.clearScreen();
 
         while (isRunning) {
-//            TerminalView.clearScreen();
-//            StudentMenu.displayMenu();
 
             DataHandler.printFromFile(location + "EmployeeMenu");
 
@@ -41,6 +42,7 @@ public class RegularEmployeeController implements EmployeeController {
 
             switch (choice) {
                 case 1:
+                    TerminalView.clearScreen();
                     displayStudents();
                     break;
                 case 2:
@@ -59,7 +61,7 @@ public class RegularEmployeeController implements EmployeeController {
     }
 
     @Override
-    public void displayStudents() {
+    public void displayStudents() throws FileNotFoundException {
         View.viewAllStudents(studentsList);
     }
 }

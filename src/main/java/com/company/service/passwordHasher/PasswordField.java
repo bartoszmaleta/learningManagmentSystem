@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class PasswordField {
     public static String readPassword (String prompt) {
-        com.company.EraserThread et = new com.company.EraserThread(prompt);
+        EraserThread et = new EraserThread(prompt);
         Thread mask = new Thread(et);
         mask.start();
 

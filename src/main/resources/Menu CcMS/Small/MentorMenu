@@ -3,16 +3,20 @@
             ║║║├┤ │││ │ │ │├┬┘  ║║║├┤ ││││ │
             ╩ ╩└─┘┘└┘ ┴ └─┘┴└─  ╩ ╩└─┘┘└┘└─┘
 
-            Choose one of the following options: 
 
-            (1) Add assignment");
-            (2) Grade student assignment");
-            (3) Remove student from class");
-            (4) Check attendance");
-            (5) Class View
-            (6) WIP - ???");
-            (7) WIP - ???");
-            (8) WIP - ???");
-            (0) Log out");
-            
-            What is Your choice : 
+             What do you want to do ?
+             (1) Check attendance - Do better!!!
+             (2) Add student to class
+             (3) Remove student from class
+             (4) Edit student's data
+             (5) Add assignment
+             (6) Grade student assignments
+
+             (7) Display all students
+             (8) Display my students
+             (9) Display all grades
+             (10) Display all assignments
+             (11) Display all classes
+             (0) Log out
+
+        What is Your choice :

@@ -5,7 +5,7 @@ import com.company.models.Grade;
 
 import java.util.List;
 
-public interface GradesDao {
+public interface GradeDao {
     void write(Grade grade);
     void remove(Grade grade);
     void edit(Grade grade);

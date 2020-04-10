@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 public class ApplicationController {
 
     public ApplicationController() throws FileNotFoundException {
-        TerminalView.displayWelcomeScreen();
         LoginController loginController = new LoginController();
         loginController.init();
     }

@@ -3,7 +3,7 @@ package com.company.dao.notUsedDao;
 import com.company.dao.Parser.CsvParser;
 import com.company.dao.UserDao;
 import com.company.models.users.User;
-import com.company.models.users.employees.Manager;
+import com.company.models.users.notUsedModels.employees.Manager;
 
 import java.util.ArrayList;
 import java.util.List;

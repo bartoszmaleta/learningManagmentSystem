@@ -2,7 +2,7 @@ package com.company.dao.notUsedDao;
 
 import com.company.dao.UserDao;
 import com.company.models.users.User;
-import com.company.models.users.employees.Mentor;
+import com.company.models.users.notUsedModels.employees.Mentor;
 
 import java.util.ArrayList;
 import java.util.List;
