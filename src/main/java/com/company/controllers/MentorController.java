@@ -60,11 +60,12 @@ public class MentorController implements EmployeeController, Controller {
 
         while (isRunning) {
             DataHandler.printFromFile(location + "MentorMenu");
-//            MentorMenu.displayMenu();
 
             int choice = TerminalManager.takeIntInputWithoutMessage();
             switch (choice) {
                 case 1:
+                    TerminalView.clearScreen();
+
                     displayStudents();
                     checkAttendance();
                     // TODO: to check! cant show because creates after stop!
@@ -72,6 +73,7 @@ public class MentorController implements EmployeeController, Controller {
                     break;
                 case 2:
                     TerminalView.clearScreen();
+
                     displayStudents();
                     int studentIdToAddToClass = TerminalManager.askForInt("Enter id of student You want to add to class");
                     User studentToClass = getStudentFromListById(studentIdToAddToClass);

@@ -13,6 +13,4 @@ public interface GradeDao {
     List<Grade> extractGradesFromListByStudentUsername(String studentUsernameForList);
     int getLastIndex();
     List<Grade> extractAllGrades();
-
-    //    User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven);
 }

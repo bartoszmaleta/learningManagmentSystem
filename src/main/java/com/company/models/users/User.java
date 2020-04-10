@@ -59,9 +59,6 @@ public class User {
         return role;
     }
 
-//    public int getId() {
-//        return id;
-//    }
     public void setRole(String role) {
         this.role = role;
     }

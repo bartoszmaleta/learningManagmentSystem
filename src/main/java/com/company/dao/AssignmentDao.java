@@ -11,7 +11,6 @@ public interface AssignmentDao {
     void edit(Assignment assignment);
     String[] toStringArray(Assignment assignment);
     List<Assignment> extractAssignmentsFromListByStudentUsername(String studentUsernameForList);
-//    User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven);
     int getLastIndex();
     List<Assignment> extractAllAssignments();
 }

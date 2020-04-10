@@ -12,5 +12,4 @@ public interface UserDao {
     User readUserByUsernameAndPassword(String usernameGiven, String passwordGiven);
     List<User> extractUsersFromListOfRecordsByRoleGiven(String roleForList);
     int getLastIndex();
-
 }

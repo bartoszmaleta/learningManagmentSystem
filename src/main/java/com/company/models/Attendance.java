@@ -15,7 +15,7 @@ public class Attendance {
         this.isPresent = setIsPresent(isPresentString);
     }
 
-    public boolean getIsPresnt() {
+    public boolean getIsPresent() {
         return isPresent;
     }
 
@@ -59,7 +59,7 @@ public class Attendance {
         String[] attendenceArray = {String.valueOf(this.getId())
                 , this.getStudentUsername()
                 , String.valueOf(this.getLocalDate())
-                , String.valueOf(this.getIsPresnt())};
+                , String.valueOf(this.getIsPresent())};
         return attendenceArray;
     }
 }
